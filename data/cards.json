@@ -1,0 +1,44 @@
+[
+  {
+    "id": "pikachu-001",
+    "name": "Pikachu",
+    "set": "Écarlate & Violet",
+    "number": "025/198",
+    "language": "FR",
+    "rarity": "Rare",
+    "quantity": 2,
+    "condition": "NM",
+    "purchasePrice": 2.5,
+    "estimatedValue": 4,
+    "location": "Classeur 01",
+    "notes": ""
+  },
+  {
+    "id": "charizard-001",
+    "name": "Dracaufeu",
+    "set": "Obsidian Flames",
+    "number": "125/197",
+    "language": "FR",
+    "rarity": "Rare",
+    "quantity": 1,
+    "condition": "NM",
+    "purchasePrice": 3,
+    "estimatedValue": 5.5,
+    "location": "Classeur 01",
+    "notes": ""
+  },
+  {
+    "id": "mew-001",
+    "name": "Mew",
+    "set": "Pokémon Card 151",
+    "number": "001/165",
+    "language": "KR",
+    "rarity": "Rare",
+    "quantity": 1,
+    "condition": "NM",
+    "purchasePrice": 1.5,
+    "estimatedValue": 3,
+    "location": "Classeur 02",
+    "notes": ""
+  }
+]
