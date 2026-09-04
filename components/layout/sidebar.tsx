@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { BarChart3, BookOpen, Library, Package } from "lucide-react";
+import { BarChart3, TrendingUp, Library, Package } from "lucide-react";
 
 const navigation = [
   {
@@ -13,6 +13,11 @@ const navigation = [
     label: "Collection",
     href: "/collection",
     icon: Library,
+  },
+  {
+    label: "Analytics",
+    href: "/analytics",
+    icon: TrendingUp,
   },
 ];
 

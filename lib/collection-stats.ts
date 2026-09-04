@@ -55,3 +55,56 @@ export function getRarityBreakdown(cards: PokemonCard[]) {
     return result;
   }, {});
 }
+
+export type SetStatistics = {
+  set: string;
+  totalCards: number;
+  uniqueCards: number;
+  invested: number;
+  estimatedValue: number;
+  profit: number;
+  roi: number;
+};
+
+export function getSetStatistics(
+  cards: PokemonCard[]
+): SetStatistics[] {
+  const sets = cards.reduce<Record<string, SetStatistics>>(
+    (result, card) => {
+      if (!result[card.set]) {
+        result[card.set] = {
+          set: card.set,
+          totalCards: 0,
+          uniqueCards: 0,
+          invested: 0,
+          estimatedValue: 0,
+          profit: 0,
+          roi: 0,
+        };
+      }
+
+      const current = result[card.set];
+
+      current.totalCards += card.quantity;
+      current.uniqueCards += 1;
+      current.invested += card.purchasePrice * card.quantity;
+      current.estimatedValue += card.estimatedValue * card.quantity;
+
+      return result;
+    },
+    {}
+  );
+
+  return Object.values(sets)
+    .map((set) => {
+      set.profit = set.estimatedValue - set.invested;
+
+      set.roi =
+        set.invested > 0
+          ? (set.profit / set.invested) * 100
+          : 0;
+
+      return set;
+    })
+    .sort((a, b) => b.estimatedValue - a.estimatedValue);
+}
