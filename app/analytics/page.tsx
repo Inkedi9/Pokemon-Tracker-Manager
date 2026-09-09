@@ -34,6 +34,23 @@ import {
     type SetStatistics,
 } from "@/lib/collection-stats";
 
+import {
+    ProfitabilityOverview,
+} from "@/components/analytics/profitability-overview";
+
+import {
+    getCardProfitabilities,
+    getProfitabilitySummary,
+} from "@/lib/profitability";
+
+import { ProfitabilityChart } from "@/components/analytics/profitability-chart";
+import { ProfitabilityDistributionChart } from "@/components/analytics/profitability-distribution-chart";
+
+import {
+    ProfitabilityChartControls,
+    type ProfitabilityChartMode,
+} from "@/components/analytics/profitability-chart-controls";
+
 function formatCurrency(value: number) {
     return `${value.toFixed(2)} €`;
 }
@@ -45,6 +62,9 @@ function formatPercent(value: number) {
 export default function AnalyticsPage() {
 
     const [chartLimit, setChartLimit] = useState<ChartLimit>(10);
+
+    const [profitabilityChartMode, setProfitabilityChartMode] =
+        useState<ProfitabilityChartMode>("profit");
 
     const { cards } = useCollection();
 
@@ -78,6 +98,16 @@ export default function AnalyticsPage() {
 
     const duplicateGroups = useMemo(
         () => getDuplicateGroups(cards),
+        [cards]
+    );
+
+    const profitabilities = useMemo(
+        () => getCardProfitabilities(cards),
+        [cards]
+    );
+
+    const profitabilitySummary = useMemo(
+        () => getProfitabilitySummary(cards),
         [cards]
     );
 
@@ -413,6 +443,41 @@ export default function AnalyticsPage() {
                         )}
                     </CardContent>
                 </Card>
+                <ProfitabilityOverview
+                    summary={profitabilitySummary}
+                    profitabilities={profitabilities}
+                />
+
+                <section className="mt-4">
+                    <div className="mb-3 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+                        <div>
+                            <h2 className="text-sm font-semibold text-zinc-200">
+                                Analyse graphique
+                            </h2>
+
+                            <p className="mt-1 text-xs text-zinc-500">
+                                Visualisation de la répartition et des performances
+                                potentielles de ta collection.
+                            </p>
+                        </div>
+
+                        <ProfitabilityChartControls
+                            value={profitabilityChartMode}
+                            onChange={setProfitabilityChartMode}
+                        />
+                    </div>
+
+                    <div className="grid gap-3 sm:gap-4 lg:grid-cols-2">
+                        <ProfitabilityDistributionChart
+                            summary={profitabilitySummary}
+                        />
+
+                        <ProfitabilityChart
+                            profitabilities={profitabilities}
+                            mode={profitabilityChartMode}
+                        />
+                    </div>
+                </section>
             </div>
         </div>
     );
