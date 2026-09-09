@@ -4,15 +4,15 @@ M0 Foundation ✅
 M1 Collection ✅
 M1.1 → M1.8 ✅
 
-M1.9 Dashboard avancé 🚀
+M1.9 Dashboard avancé ✅
 
-M2 Collection Intelligence
+M2 Collection Intelligence ✅
 ├── doublons
 ├── statistiques avancées
 ├── ROI par carte
 └── valeur par extension
 
-M3 Storage
+M3 Storage 🚀
 ├── classeur
 ├── page
 └── slot
