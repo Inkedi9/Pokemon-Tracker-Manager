@@ -10,6 +10,7 @@ import {
 import { useMemo, useState } from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 import { useCollection } from "@/components/collection/collection-provider";
 
@@ -50,6 +51,25 @@ import {
     ProfitabilityChartControls,
     type ProfitabilityChartMode,
 } from "@/components/analytics/profitability-chart-controls";
+
+import { ConcentrationOverview } from "@/components/analytics/concentration-overview";
+
+import { getCollectionConcentration } from "@/lib/collection-concentration";
+
+import { ConcentrationCardChart } from "@/components/analytics/concentration-card-chart";
+import { ConcentrationSetChart } from "@/components/analytics/concentration-set-chart";
+
+import { getCardConcentration } from "@/lib/collection-concentration";
+
+import { ConcentrationInsights } from "@/components/analytics/concentration-insights";
+
+import {
+    getConcentrationInsights,
+} from "@/lib/concentration-insights";
+
+import { AdvancedCollectionStats } from "@/components/analytics/advanced-collection-stats";
+
+import { getAdvancedCollectionStats } from "@/lib/advanced-stats";
 
 function formatCurrency(value: number) {
     return `${value.toFixed(2)} €`;
@@ -111,6 +131,26 @@ export default function AnalyticsPage() {
         [cards]
     );
 
+    const concentration = useMemo(
+        () => getCollectionConcentration(cards),
+        [cards]
+    );
+
+    const cardConcentration = useMemo(
+        () => getCardConcentration(cards),
+        [cards]
+    );
+
+    const concentrationInsights = useMemo(
+        () => getConcentrationInsights(concentration),
+        [concentration]
+    );
+
+    const advancedStats = useMemo(
+        () => getAdvancedCollectionStats(cards),
+        [cards]
+    );
+
     return (
         <div className="p-4 sm:p-6 lg:p-8">
             <div className="mx-auto max-w-[1600px]">
@@ -127,7 +167,7 @@ export default function AnalyticsPage() {
                             </h1>
 
                             <p className="mt-1 text-sm text-zinc-500">
-                                Analyse détaillée de ta collection par extension.
+                                Analyse détaillée de la valeur, de la structure et de la répartition de ta collection.
                             </p>
                         </div>
                     </div>
@@ -478,6 +518,63 @@ export default function AnalyticsPage() {
                         />
                     </div>
                 </section>
+
+                <ConcentrationOverview
+                    concentration={concentration}
+                />
+
+                <ConcentrationInsights
+                    insights={concentrationInsights}
+                />
+
+                {cards.length > 0 && (
+                    <section className="mt-4">
+                        <div className="mb-3">
+                            <h2 className="text-sm font-semibold text-zinc-200">
+                                Analyse de concentration
+                            </h2>
+
+                            <p className="mt-1 text-xs text-zinc-500">
+                                Visualisation de la répartition de la valeur de ta collection.
+                            </p>
+
+                            <div className="mt-3 flex flex-wrap gap-2">
+                                <Badge
+                                    variant="outline"
+                                    className="border-white/10 bg-white/[0.02] text-[10px] text-zinc-500"
+                                >
+                                    Top 1 · {concentration.top1Percentage.toFixed(1)} %
+                                </Badge>
+
+                                <Badge
+                                    variant="outline"
+                                    className="border-white/10 bg-white/[0.02] text-[10px] text-zinc-500"
+                                >
+                                    Top 5 · {concentration.top5Percentage.toFixed(1)} %
+                                </Badge>
+
+                                <Badge
+                                    variant="outline"
+                                    className="border-white/10 bg-white/[0.02] text-[10px] text-zinc-500"
+                                >
+                                    Top 10 · {concentration.top10Percentage.toFixed(1)} %
+                                </Badge>
+                            </div>
+                        </div>
+
+                        <div className="grid gap-3 sm:gap-4 lg:grid-cols-2">
+                            <ConcentrationCardChart
+                                cards={cardConcentration}
+                            />
+
+                            <ConcentrationSetChart
+                                sets={concentration.setDistribution}
+                            />
+                        </div>
+                    </section>
+                )}
+
+                <AdvancedCollectionStats stats={advancedStats} />
             </div>
         </div>
     );

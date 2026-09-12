@@ -204,7 +204,7 @@ export default function CollectionPage() {
 
             {/* Statistics */}
             <div className="mb-6 grid gap-4 sm:grid-cols-3">
-                <Card className="border-white/10 bg-[#111114] p-4">
+                <Card className="rounded-xl border-white/10 bg-[#111114] p-4">
                     <div className="flex items-center justify-between">
                         <div>
                             <p className="text-[10px] uppercase tracking-[0.15em] text-zinc-600">
@@ -222,7 +222,7 @@ export default function CollectionPage() {
                     </div>
                 </Card>
 
-                <Card className="border-white/10 bg-[#111114] p-4">
+                <Card className="rounded-xl border-white/10 bg-[#111114] p-4">
                     <div className="flex items-center justify-between">
                         <div>
                             <p className="text-[10px] uppercase tracking-[0.15em] text-zinc-600">
@@ -240,7 +240,7 @@ export default function CollectionPage() {
                     </div>
                 </Card>
 
-                <Card className="border-white/10 bg-[#111114] p-4">
+                <Card className="rounded-xl border-white/10 bg-[#111114] p-4">
                     <div className="flex items-center justify-between">
                         <div>
                             <p className="text-[10px] uppercase tracking-[0.15em] text-zinc-600">
@@ -297,7 +297,7 @@ export default function CollectionPage() {
                             setLanguage(value ?? "")
                         }
                     >
-                        <SelectTrigger className="border-white/10 bg-[#111114] text-white">
+                        <SelectTrigger className="rounded-xl border-white/10 bg-[#111114] text-white">
                             <SelectValue placeholder="Toutes les langues" />
                         </SelectTrigger>
 
