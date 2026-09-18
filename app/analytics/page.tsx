@@ -7,7 +7,7 @@ import {
     TrendingUp,
 } from "lucide-react";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -70,6 +70,43 @@ import {
 import { AdvancedCollectionStats } from "@/components/analytics/advanced-collection-stats";
 
 import { getAdvancedCollectionStats } from "@/lib/advanced-stats";
+
+import { getCollectionIntelligence } from "@/lib/collection-intelligence";
+import { CollectionHealthCard } from "@/components/insights/collection-health-card";
+import { CollectionHealthBreakdown } from "@/components/insights/collection-health-breakdown";
+import { MissingDataIntelligence } from "@/components/insights/missing-data-intelligence";
+import { getMissingDataSummary } from "@/lib/missing-data-intelligence";
+
+import {
+    getCollectionGoalsSummary,
+    DEFAULT_COLLECTION_GOALS,
+    type CollectionGoal,
+} from "@/lib/collection-goals";
+
+import {
+    loadCollectionGoals,
+    saveCollectionGoals,
+} from "@/lib/collection-goals-storage";
+
+import { CollectionGoals } from "@/components/insights/collection-goals";
+
+import { CollectionProgress } from "@/components/insights/collection-progress";
+
+import {
+    createCollectionSnapshot,
+    getCollectionProgressSummary,
+} from "@/lib/collection-progress";
+
+import {
+    addCollectionProgressSnapshot,
+    loadCollectionProgress,
+} from "@/lib/collection-progress-storage";
+
+import type {
+    CollectionProgressSnapshot,
+} from "@/lib/collection-progress";
+
+import { CollectionProgressChart } from "@/components/insights/collection-progress-chart";
 
 function formatCurrency(value: number) {
     return `${value.toFixed(2)} €`;
@@ -151,6 +188,84 @@ export default function AnalyticsPage() {
         [cards]
     );
 
+    const intelligence = getCollectionIntelligence(cards);
+
+    const missingDataSummary =
+        getMissingDataSummary(cards);
+
+    const [goals, setGoals] = useState<CollectionGoal[]>(
+        DEFAULT_COLLECTION_GOALS
+    );
+
+    useEffect(() => {
+        setGoals(loadCollectionGoals());
+    }, []);
+
+    const goalsSummary = useMemo(
+        () =>
+            getCollectionGoalsSummary(
+                cards,
+                goals
+            ),
+        [cards, goals]
+    );
+
+    const [progressSnapshots, setProgressSnapshots] =
+        useState<CollectionProgressSnapshot[]>([]);
+
+    useEffect(() => {
+        setProgressSnapshots(
+            loadCollectionProgress()
+        );
+    }, []);
+
+    useEffect(() => {
+        if (!cards.length) {
+            return;
+        }
+
+        const snapshot =
+            createCollectionSnapshot(cards);
+
+        const updatedSnapshots =
+            addCollectionProgressSnapshot(
+                snapshot
+            );
+
+        setProgressSnapshots(
+            updatedSnapshots
+        );
+    }, [cards]);
+
+    const progressSummary = useMemo(
+        () =>
+            getCollectionProgressSummary(
+                progressSnapshots
+            ),
+        [progressSnapshots]
+    );
+
+    function updateGoal(
+        id: string,
+        updates: Partial<CollectionGoal>
+    ) {
+        setGoals((currentGoals) => {
+            const updatedGoals = currentGoals.map(
+                (goal) =>
+                    goal.id === id
+                        ? {
+                            ...goal,
+                            ...updates,
+                        }
+                        : goal
+            );
+
+            saveCollectionGoals(updatedGoals);
+
+            return updatedGoals;
+        });
+    }
+
     return (
         <div className="p-4 sm:p-6 lg:p-8">
             <div className="mx-auto max-w-[1600px]">
@@ -171,6 +286,41 @@ export default function AnalyticsPage() {
                             </p>
                         </div>
                     </div>
+                </div>
+
+                {/* Collection Intelligence */}
+                <CollectionHealthCard intelligence={intelligence} />
+
+                <div className="mt-4">
+                    <CollectionHealthBreakdown
+                        intelligence={intelligence}
+                    />
+                </div>
+
+                <div className="mt-4">
+                    <MissingDataIntelligence
+                        summary={missingDataSummary}
+                    />
+                </div>
+
+                <div className="mt-4">
+                    <CollectionGoals
+                        goals={goals}
+                        progress={goalsSummary.goals}
+                        onUpdateGoal={updateGoal}
+                    />
+                </div>
+
+                <div className="mt-4">
+                    <CollectionProgress
+                        summary={progressSummary}
+                    />
+                </div>
+
+                <div className="mt-4">
+                    <CollectionProgressChart
+                        snapshots={progressSnapshots}
+                    />
                 </div>
 
                 {/* Overview */}

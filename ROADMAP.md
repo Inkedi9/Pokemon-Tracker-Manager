@@ -19,23 +19,23 @@ M3 Storage 🚀
 
 🗺️ Roadmap M3
 
-M3.1 — Collection Intelligence Core
+M3.1 — Collection Intelligence Core ✅
 
 Créer le moteur de recommandations/analyse.
 
-M3.2 — Collection Health
+M3.2 — Collection Health ✅
 
 Analyser la qualité des données de la collection.
 
-M3.3 — Missing Data
+M3.3 — Missing Data ✅
 
 Détecter les informations manquantes.
 
-M3.4 — Collection Goals
+M3.4 — Collection Goals ✅
 
 Permettre de définir des objectifs de collection.
 
-M3.5 — Collection Progress
+M3.5 — Collection Progress ✅
 
 Suivre la progression vers ces objectifs.
 
