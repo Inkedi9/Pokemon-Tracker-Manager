@@ -23,6 +23,25 @@ const CollectionContext =
 
 const STORAGE_KEY = "pokemon-tracker-collection";
 
+function loadCardsFromStorage() {
+  const stored = localStorage.getItem(STORAGE_KEY);
+
+  if (stored) {
+    try {
+      return JSON.parse(stored) as PokemonCard[];
+    } catch {
+      return initialCards as PokemonCard[];
+    }
+  }
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(initialCards)
+  );
+
+  return initialCards as PokemonCard[];
+}
+
 export function CollectionProvider({
   children,
 }: {
@@ -32,23 +51,12 @@ export function CollectionProvider({
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY);
+    const timerId = window.setTimeout(() => {
+      setCards(loadCardsFromStorage());
+      setHydrated(true);
+    }, 0);
 
-    if (stored) {
-      try {
-        setCards(JSON.parse(stored) as PokemonCard[]);
-      } catch {
-        setCards(initialCards as PokemonCard[]);
-      }
-    } else {
-      setCards(initialCards as PokemonCard[]);
-      localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(initialCards)
-      );
-    }
-
-    setHydrated(true);
+    return () => window.clearTimeout(timerId);
   }, []);
 
   useEffect(() => {

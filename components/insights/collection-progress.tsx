@@ -129,19 +129,19 @@ export function CollectionProgress({
 
                                 <Badge
                                     variant="outline"
-                                    className="border-blue-400/20 bg-blue-400/5 text-[10px] text-blue-300"
+                                    className="border-white/10 bg-white/[0.02] text-[10px] text-zinc-500"
                                 >
                                     M3.5
                                 </Badge>
                             </div>
 
                             <p className="mt-1 text-xs text-zinc-500">
-                                Suis l'évolution de ta collection dans le temps.
+                                Suis l&apos;évolution de ta collection dans le temps.
                             </p>
                         </div>
                     </div>
 
-                    <div className="mt-5 rounded-lg border border-white/5 bg-white/[0.02] p-6 text-center">
+                    <div className="mt-5 rounded-xl border border-white/10 bg-[#111114] p-6 text-center">
                         <TrendingUp className="mx-auto h-5 w-5 text-zinc-600" />
 
                         <p className="mt-2 text-xs font-medium text-zinc-400">
@@ -162,7 +162,6 @@ export function CollectionProgress({
         current,
         cardsChange,
         valueChange,
-        investedChange,
         setsChange,
         languagesChange,
         snapshots,
@@ -182,7 +181,7 @@ export function CollectionProgress({
 
                             <Badge
                                 variant="outline"
-                                className="border-blue-400/20 bg-blue-400/5 text-[10px] text-blue-300"
+                                className="border-white/10 bg-white/[0.02] text-[10px] text-zinc-500"
                             >
                                 M3.5
                             </Badge>

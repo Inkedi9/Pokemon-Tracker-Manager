@@ -121,7 +121,7 @@ export function CollectionHealthCard({
 
                                     <Badge
                                         variant="outline"
-                                        className="border-violet-400/20 bg-violet-400/5 text-[10px] text-violet-300"
+                                        className="border-white/10 bg-white/[0.02] text-[10px] text-zinc-500"
                                     >
                                         Intelligence
                                     </Badge>
@@ -152,7 +152,7 @@ export function CollectionHealthCard({
 
                             <div className="relative flex flex-col items-center">
                                 <span
-                                    className={`text-3xl font-bold tracking-tight ${scoreColor}`}
+                                    className={`text-2xl font-bold tracking-tight ${scoreColor}`}
                                 >
                                     {intelligence.score}
                                 </span>
@@ -174,7 +174,7 @@ export function CollectionHealthCard({
 
                             <p className="mt-1 text-xs leading-relaxed text-zinc-500">
                                 Score basé sur la qualité des données,
-                                l'organisation et la structure actuelle de ta
+                                l&apos;organisation et la structure actuelle de ta
                                 collection.
                             </p>
                         </div>

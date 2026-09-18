@@ -5,6 +5,7 @@ import {
     Package,
     Star,
 } from "lucide-react";
+import Image from "next/image";
 
 import { Card } from "@/components/ui/card";
 
@@ -37,10 +38,13 @@ export function CardItem({ card }: CardItemProps) {
             {/* Image */}
             <div className="relative aspect-[3/4] items-center justify-center bg-[#18181b]">
                 {card.image ? (
-                    <img
+                    <Image
                         src={card.image}
                         alt={card.name}
-                        className="h-full w-full object-cover"
+                        fill
+                        unoptimized
+                        sizes="(min-width: 1280px) 25vw, (min-width: 768px) 50vw, 100vw"
+                        className="object-cover"
                     />
                 ) : (
                     <div className="text-center">

@@ -47,15 +47,15 @@ export default function DashboardPage() {
       <div className="mx-auto max-w-[1600px]">
         {/* Header */}
         <div className="mb-8">
-          <p className="mb-2 text-xs font-medium uppercase tracking-[0.2em] text-yellow-400">
+          <p className="mb-2 text-xs font-medium uppercase tracking-[0.2em] text-zinc-500">
             Collection Overview
           </p>
 
-          <h2 className="text-3xl font-bold tracking-tight text-white">
+          <h2 className="text-xl font-semibold tracking-tight text-zinc-100 sm:text-2xl">
             Bienvenue dans ta collection
           </h2>
 
-          <p className="mt-2 text-sm text-zinc-500">
+          <p className="mt-2 text-xs text-zinc-500 sm:text-sm">
             Vue d’ensemble de ton inventaire Pokémon.
           </p>
         </div>
@@ -71,7 +71,7 @@ export default function DashboardPage() {
             </CardHeader>
 
             <CardContent>
-              <p className="text-3xl font-bold text-white">
+              <p className="text-2xl font-bold text-white">
                 {totalCards}
               </p>
 
@@ -90,7 +90,7 @@ export default function DashboardPage() {
             </CardHeader>
 
             <CardContent>
-              <p className="text-3xl font-bold text-white">
+              <p className="text-2xl font-bold text-white">
                 {totalInvested.toFixed(2)} €
               </p>
 
@@ -109,7 +109,7 @@ export default function DashboardPage() {
             </CardHeader>
 
             <CardContent>
-              <p className="text-3xl font-bold text-white">
+              <p className="text-2xl font-bold text-white">
                 {totalValue.toFixed(2)} €
               </p>
 
@@ -129,7 +129,7 @@ export default function DashboardPage() {
 
             <CardContent>
               <p
-                className={`text-3xl font-bold ${totalProfit >= 0
+                className={`text-2xl font-bold ${totalProfit >= 0
                   ? "text-emerald-400"
                   : "text-red-400"
                   }`}
@@ -186,7 +186,7 @@ export default function DashboardPage() {
                   Valeur actuelle
                 </p>
 
-                <p className="mt-2 text-3xl font-bold text-white">
+                <p className="mt-2 text-2xl font-bold text-white">
                   {totalValue.toFixed(2)} €
                 </p>
 
@@ -201,12 +201,12 @@ export default function DashboardPage() {
                   Total investi
                 </p>
 
-                <p className="mt-2 text-3xl font-bold text-zinc-300">
+                <p className="mt-2 text-2xl font-bold text-zinc-300">
                   {totalInvested.toFixed(2)} €
                 </p>
 
                 <p className="mt-1 text-xs text-zinc-600">
-                  coût d'acquisition
+                  coût d&apos;acquisition
                 </p>
               </div>
 
@@ -217,7 +217,7 @@ export default function DashboardPage() {
                 </p>
 
                 <p
-                  className={`mt-2 text-3xl font-bold ${isProfitPositive
+                  className={`mt-2 text-2xl font-bold ${isProfitPositive
                     ? "text-emerald-400"
                     : "text-red-400"
                     }`}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Pencil } from "lucide-react";
 import { toast } from "sonner";
 
@@ -39,14 +39,8 @@ type EditCardDialogProps = {
   card: PokemonCard;
 };
 
-export function EditCardDialog({
-  card,
-}: EditCardDialogProps) {
-  const { updateCard } = useCollection();
-
-  const [open, setOpen] = useState(false);
-
-  const [form, setForm] = useState({
+function getCardForm(card: PokemonCard) {
+  return {
     name: card.name,
     set: card.set,
     number: card.number,
@@ -58,31 +52,28 @@ export function EditCardDialog({
     estimatedValue: String(card.estimatedValue),
     location: card.location ?? "",
     notes: card.notes ?? "",
-  });
+  };
+}
+
+export function EditCardDialog({
+  card,
+}: EditCardDialogProps) {
+  const { updateCard } = useCollection();
+
+  const [open, setOpen] = useState(false);
+
+  const [form, setForm] = useState(() => getCardForm(card));
 
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    if (!open) {
-      return;
+  function handleOpenChange(value: boolean) {
+    if (value) {
+      setForm(getCardForm(card));
     }
 
-    setForm({
-      name: card.name,
-      set: card.set,
-      number: card.number,
-      language: card.language,
-      rarity: card.rarity,
-      condition: card.condition,
-      quantity: String(card.quantity),
-      purchasePrice: String(card.purchasePrice),
-      estimatedValue: String(card.estimatedValue),
-      location: card.location ?? "",
-      notes: card.notes ?? "",
-    });
-
     setError("");
-  }, [open, card]);
+    setOpen(value);
+  }
 
   function updateField(
     field: keyof typeof form,
@@ -189,7 +180,7 @@ export function EditCardDialog({
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger className="flex-1 gap-2 text-zinc-400 hover:bg-white/5 hover:text-white inline-flex items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors">
         <Pencil className="h-3.5 w-3.5" />
         Modifier
@@ -421,7 +412,7 @@ export function EditCardDialog({
                   <Label
                     htmlFor={`edit-purchase-${card.id}`}
                   >
-                    Prix d'achat (€)
+                    Prix d&apos;achat (€)
                   </Label>
 
                   <Input

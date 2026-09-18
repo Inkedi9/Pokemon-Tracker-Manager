@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import {
     CheckCircle2,
@@ -208,23 +208,6 @@ export function CollectionGoals({
 
     const activeGoals = progress;
 
-    useEffect(() => {
-        if (!dialogOpen) {
-            return;
-        }
-
-        const selectedGoal = goals.find(
-            (goal) => goal.type === selectedType
-        );
-
-        if (!selectedGoal) {
-            return;
-        }
-
-        setTarget(String(selectedGoal.target));
-        setEnabled(selectedGoal.enabled);
-    }, [dialogOpen, selectedType, goals]);
-
     function openEditor(goal?: CollectionGoal) {
         const goalToEdit =
             goal ??
@@ -296,7 +279,7 @@ export function CollectionGoals({
 
                                 <Badge
                                     variant="outline"
-                                    className="border-violet-400/20 bg-violet-400/5 text-[10px] text-violet-300"
+                                    className="border-white/10 bg-white/[0.02] text-[10px] text-zinc-500"
                                 >
                                     M3.4
                                 </Badge>
@@ -330,7 +313,7 @@ export function CollectionGoals({
                             ))}
                         </div>
                     ) : (
-                        <div className="rounded-lg border border-white/5 bg-white/[0.02] p-5 text-center">
+                        <div className="rounded-xl border border-white/10 bg-[#111114] p-5 text-center">
                             <Target className="mx-auto h-5 w-5 text-zinc-600" />
 
                             <p className="mt-2 text-xs font-medium text-zinc-400">
@@ -366,7 +349,7 @@ export function CollectionGoals({
                                 htmlFor="goal-type"
                                 className="text-xs text-zinc-400"
                             >
-                                Type d'objectif
+                                Type d&apos;objectif
                             </Label>
 
                             <select

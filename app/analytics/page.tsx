@@ -7,7 +7,7 @@ import {
     TrendingUp,
 } from "lucide-react";
 
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState } from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -27,7 +27,6 @@ import { DuplicateDetection } from "@/components/analytics/duplicate-detection";
 
 import {
     getDuplicateGroups,
-    getDuplicateSummary,
 } from "@/lib/duplicate-detection";
 
 import {
@@ -71,43 +70,6 @@ import { AdvancedCollectionStats } from "@/components/analytics/advanced-collect
 
 import { getAdvancedCollectionStats } from "@/lib/advanced-stats";
 
-import { getCollectionIntelligence } from "@/lib/collection-intelligence";
-import { CollectionHealthCard } from "@/components/insights/collection-health-card";
-import { CollectionHealthBreakdown } from "@/components/insights/collection-health-breakdown";
-import { MissingDataIntelligence } from "@/components/insights/missing-data-intelligence";
-import { getMissingDataSummary } from "@/lib/missing-data-intelligence";
-
-import {
-    getCollectionGoalsSummary,
-    DEFAULT_COLLECTION_GOALS,
-    type CollectionGoal,
-} from "@/lib/collection-goals";
-
-import {
-    loadCollectionGoals,
-    saveCollectionGoals,
-} from "@/lib/collection-goals-storage";
-
-import { CollectionGoals } from "@/components/insights/collection-goals";
-
-import { CollectionProgress } from "@/components/insights/collection-progress";
-
-import {
-    createCollectionSnapshot,
-    getCollectionProgressSummary,
-} from "@/lib/collection-progress";
-
-import {
-    addCollectionProgressSnapshot,
-    loadCollectionProgress,
-} from "@/lib/collection-progress-storage";
-
-import type {
-    CollectionProgressSnapshot,
-} from "@/lib/collection-progress";
-
-import { CollectionProgressChart } from "@/components/insights/collection-progress-chart";
-
 function formatCurrency(value: number) {
     return `${value.toFixed(2)} €`;
 }
@@ -145,13 +107,10 @@ export default function AnalyticsPage() {
 
     const mostValuableSet = statistics[0];
 
-    const chartStatistics = useMemo(() => {
-        if (chartLimit === "all") {
-            return statistics;
-        }
-
-        return statistics.slice(0, chartLimit);
-    }, [statistics, chartLimit]);
+    const chartStatistics =
+        chartLimit === "all"
+            ? statistics
+            : statistics.slice(0, chartLimit);
 
     const duplicateGroups = useMemo(
         () => getDuplicateGroups(cards),
@@ -188,84 +147,6 @@ export default function AnalyticsPage() {
         [cards]
     );
 
-    const intelligence = getCollectionIntelligence(cards);
-
-    const missingDataSummary =
-        getMissingDataSummary(cards);
-
-    const [goals, setGoals] = useState<CollectionGoal[]>(
-        DEFAULT_COLLECTION_GOALS
-    );
-
-    useEffect(() => {
-        setGoals(loadCollectionGoals());
-    }, []);
-
-    const goalsSummary = useMemo(
-        () =>
-            getCollectionGoalsSummary(
-                cards,
-                goals
-            ),
-        [cards, goals]
-    );
-
-    const [progressSnapshots, setProgressSnapshots] =
-        useState<CollectionProgressSnapshot[]>([]);
-
-    useEffect(() => {
-        setProgressSnapshots(
-            loadCollectionProgress()
-        );
-    }, []);
-
-    useEffect(() => {
-        if (!cards.length) {
-            return;
-        }
-
-        const snapshot =
-            createCollectionSnapshot(cards);
-
-        const updatedSnapshots =
-            addCollectionProgressSnapshot(
-                snapshot
-            );
-
-        setProgressSnapshots(
-            updatedSnapshots
-        );
-    }, [cards]);
-
-    const progressSummary = useMemo(
-        () =>
-            getCollectionProgressSummary(
-                progressSnapshots
-            ),
-        [progressSnapshots]
-    );
-
-    function updateGoal(
-        id: string,
-        updates: Partial<CollectionGoal>
-    ) {
-        setGoals((currentGoals) => {
-            const updatedGoals = currentGoals.map(
-                (goal) =>
-                    goal.id === id
-                        ? {
-                            ...goal,
-                            ...updates,
-                        }
-                        : goal
-            );
-
-            saveCollectionGoals(updatedGoals);
-
-            return updatedGoals;
-        });
-    }
-
     return (
         <div className="p-4 sm:p-6 lg:p-8">
             <div className="mx-auto max-w-[1600px]">
@@ -277,50 +158,15 @@ export default function AnalyticsPage() {
                         </div>
 
                         <div>
-                            <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+                            <h1 className="text-xl font-semibold tracking-tight text-zinc-100 sm:text-2xl">
                                 Analytics
                             </h1>
 
-                            <p className="mt-1 text-sm text-zinc-500">
+                            <p className="mt-1 text-xs text-zinc-500 sm:text-sm">
                                 Analyse détaillée de la valeur, de la structure et de la répartition de ta collection.
                             </p>
                         </div>
                     </div>
-                </div>
-
-                {/* Collection Intelligence */}
-                <CollectionHealthCard intelligence={intelligence} />
-
-                <div className="mt-4">
-                    <CollectionHealthBreakdown
-                        intelligence={intelligence}
-                    />
-                </div>
-
-                <div className="mt-4">
-                    <MissingDataIntelligence
-                        summary={missingDataSummary}
-                    />
-                </div>
-
-                <div className="mt-4">
-                    <CollectionGoals
-                        goals={goals}
-                        progress={goalsSummary.goals}
-                        onUpdateGoal={updateGoal}
-                    />
-                </div>
-
-                <div className="mt-4">
-                    <CollectionProgress
-                        summary={progressSummary}
-                    />
-                </div>
-
-                <div className="mt-4">
-                    <CollectionProgressChart
-                        snapshots={progressSnapshots}
-                    />
                 </div>
 
                 {/* Overview */}
@@ -523,7 +369,7 @@ export default function AnalyticsPage() {
                             Analyse par extension
                         </CardTitle>
 
-                        <p className="text-xs text-zinc-600">
+                        <p className="text-xs text-zinc-500">
                             Vue détaillée de la performance de chaque extension.
                         </p>
                     </CardHeader>

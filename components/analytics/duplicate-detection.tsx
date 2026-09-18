@@ -137,7 +137,7 @@ function DuplicateGroupCard({
 
             <Badge
               variant="outline"
-              className="border-violet-400/20 bg-violet-400/5 text-violet-300"
+              className="border-white/10 bg-white/[0.02] text-zinc-500"
             >
               {group.cards.length} entrées
             </Badge>
@@ -148,7 +148,7 @@ function DuplicateGroupCard({
       <CardContent className="p-4 sm:p-5">
         {/* Group stats */}
         <div className="grid gap-3 sm:grid-cols-3">
-          <div className="rounded-lg border border-white/5 bg-black/10 p-3">
+          <div className="rounded-lg border border-white/5 bg-white/[0.02] p-3">
             <div className="flex items-center gap-2 text-zinc-600">
               <Package className="h-3.5 w-3.5" />
 
@@ -162,7 +162,7 @@ function DuplicateGroupCard({
             </p>
           </div>
 
-          <div className="rounded-lg border border-white/5 bg-black/10 p-3">
+          <div className="rounded-lg border border-white/5 bg-white/[0.02] p-3">
             <div className="flex items-center gap-2 text-zinc-600">
               <Wallet className="h-3.5 w-3.5" />
 
@@ -176,7 +176,7 @@ function DuplicateGroupCard({
             </p>
           </div>
 
-          <div className="rounded-lg border border-white/5 bg-black/10 p-3">
+          <div className="rounded-lg border border-white/5 bg-white/[0.02] p-3">
             <div className="flex items-center gap-2 text-zinc-600">
               <TrendingUp className="h-3.5 w-3.5" />
 
@@ -285,21 +285,21 @@ function DuplicateGroupCard({
                 </p>
 
                 <p className="mt-1 text-[11px] text-zinc-600">
-                  L'entrée principale sera conservée et les autres
+                  L&apos;entrée principale sera conservée et les autres
                   seront supprimées.
                 </p>
               </div>
 
               <Badge
                 variant="outline"
-                className="w-fit border-violet-400/20 bg-violet-400/5 text-violet-300"
+                className="w-fit border-white/10 bg-white/[0.02] text-zinc-500"
               >
                 {mergePreview.removedIds.length} entrée(s) supprimée(s)
               </Badge>
             </div>
 
             <div className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
-              <div className="rounded-lg border border-white/5 bg-black/10 p-3">
+              <div className="rounded-lg border border-white/5 bg-white/[0.02] p-3">
                 <p className="text-[10px] uppercase tracking-wider text-zinc-600">
                   Quantité finale
                 </p>
@@ -309,9 +309,9 @@ function DuplicateGroupCard({
                 </p>
               </div>
 
-              <div className="rounded-lg border border-white/5 bg-black/10 p-3">
+              <div className="rounded-lg border border-white/5 bg-white/[0.02] p-3">
                 <p className="text-[10px] uppercase tracking-wider text-zinc-600">
-                  Prix d'achat moyen
+                  Prix d&apos;achat moyen
                 </p>
 
                 <p className="mt-1 text-sm font-semibold text-zinc-200">
@@ -321,7 +321,7 @@ function DuplicateGroupCard({
                 </p>
               </div>
 
-              <div className="rounded-lg border border-white/5 bg-black/10 p-3">
+              <div className="rounded-lg border border-white/5 bg-white/[0.02] p-3">
                 <p className="text-[10px] uppercase tracking-wider text-zinc-600">
                   Valeur estimée
                 </p>
@@ -333,7 +333,7 @@ function DuplicateGroupCard({
                 </p>
               </div>
 
-              <div className="rounded-lg border border-white/5 bg-black/10 p-3">
+              <div className="rounded-lg border border-white/5 bg-white/[0.02] p-3">
                 <p className="text-[10px] uppercase tracking-wider text-zinc-600">
                   Condition retenue
                 </p>
@@ -345,7 +345,7 @@ function DuplicateGroupCard({
             </div>
 
             <div className="mt-3 grid gap-2 sm:grid-cols-2">
-              <div className="rounded-lg border border-white/5 bg-black/10 p-3">
+              <div className="rounded-lg border border-white/5 bg-white/[0.02] p-3">
                 <p className="text-[10px] uppercase tracking-wider text-zinc-600">
                   Emplacement final
                 </p>
@@ -356,7 +356,7 @@ function DuplicateGroupCard({
                 </p>
               </div>
 
-              <div className="rounded-lg border border-white/5 bg-black/10 p-3">
+              <div className="rounded-lg border border-white/5 bg-white/[0.02] p-3">
                 <p className="text-[10px] uppercase tracking-wider text-zinc-600">
                   Notes
                 </p>
@@ -367,9 +367,9 @@ function DuplicateGroupCard({
               </div>
             </div>
 
-            <div className="mt-3 rounded-lg border border-white/5 bg-black/10 px-3 py-2">
+            <div className="mt-3 rounded-lg border border-white/5 bg-white/[0.02] px-3 py-2">
               <p className="text-[10px] text-zinc-600">
-                La condition affichée correspond à celle de l'entrée
+                La condition affichée correspond à celle de l&apos;entrée
                 principale sélectionnée.
               </p>
             </div>
@@ -379,7 +379,7 @@ function DuplicateGroupCard({
         {/* Actions */}
         <div className="mt-4 flex flex-col gap-2 border-t border-white/5 pt-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="text-[11px] text-zinc-600">
-            L'entrée principale sera conservée lors de la prochaine
+            L&apos;entrée principale sera conservée lors de la prochaine
             étape de fusion.
           </div>
 
@@ -414,7 +414,7 @@ function DuplicateGroupCard({
         open={isMergeDialogOpen}
         onOpenChange={setIsMergeDialogOpen}
       >
-        <DialogContent className="border-white/10 bg-zinc-950 sm:max-w-lg">
+        <DialogContent className="border-white/10 bg-[#111114] sm:max-w-lg">
           <DialogHeader>
             <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-full border border-amber-400/20 bg-amber-400/10">
               <AlertTriangle className="h-5 w-5 text-amber-400" />
@@ -451,7 +451,7 @@ function DuplicateGroupCard({
 
                   <Badge
                     variant="outline"
-                    className="border-violet-400/20 bg-violet-400/5 text-violet-300"
+                    className="border-white/10 bg-white/[0.02] text-zinc-500"
                   >
                     {mergePreview.mergedCard.condition}
                   </Badge>
@@ -487,7 +487,7 @@ function DuplicateGroupCard({
 
                 <p className="mt-1 text-[11px] leading-relaxed text-zinc-500">
                   Les {mergePreview.removedIds.length} entrée(s)
-                  secondaire(s) seront supprimées lors de l'exécution
+                  secondaire(s) seront supprimées lors de l&apos;exécution
                   de la fusion. Cette étape ne peut pas encore être
                   annulée automatiquement.
                 </p>
@@ -588,7 +588,7 @@ export function DuplicateDetection({
 
           <Badge
             variant="outline"
-            className="border-violet-400/20 bg-violet-400/5 text-violet-300"
+            className="border-white/10 bg-white/[0.02] text-zinc-500"
           >
             {visibleGroups.length}
           </Badge>

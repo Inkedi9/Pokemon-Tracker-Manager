@@ -359,7 +359,7 @@ export function AddCardDialog() {
 
                                 <div className="space-y-2">
                                     <Label htmlFor="purchasePrice">
-                                        Prix d'achat (€)
+                                        Prix d&apos;achat (€)
                                     </Label>
 
                                     <Input

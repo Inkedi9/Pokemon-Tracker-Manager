@@ -177,7 +177,7 @@ function GrowthStat({
     const negative = value < 0;
 
     return (
-        <div className="rounded-xl border border-white/5 bg-white/[0.02] p-3">
+        <div className="rounded-lg border border-white/5 bg-white/[0.02] p-3">
             <div className="flex items-center justify-between gap-2">
                 <div className="flex min-w-0 items-center gap-2">
                     <div className="text-zinc-500">
@@ -274,7 +274,7 @@ export function CollectionProgressChart({
         )?.label ?? "Tout";
 
     return (
-        <Card className="border-white/5 bg-zinc-950/60">
+        <Card className="rounded-xl border-white/10 bg-[#111114]">
             <CardContent className="p-4 sm:p-5">
                 {/* Header */}
                 <div className="flex flex-col gap-4">
@@ -314,7 +314,7 @@ export function CollectionProgressChart({
                                     }
                                     className={`h-7 rounded-lg px-2.5 text-[11px] ${
                                         range === item.id
-                                            ? "bg-white/10 text-zinc-200"
+                                            ? "bg-white/[0.08] text-zinc-200"
                                             : "text-zinc-600 hover:bg-white/5 hover:text-zinc-300"
                                     }`}
                                 >
@@ -342,7 +342,7 @@ export function CollectionProgressChart({
                                     }
                                     className={`h-7 rounded-lg px-2.5 text-[11px] ${
                                         metric === item.id
-                                            ? "bg-blue-400/10 text-blue-300"
+                                            ? "bg-violet-400/10 text-violet-300"
                                             : "text-zinc-600 hover:bg-white/5 hover:text-zinc-300"
                                     }`}
                                 >
@@ -443,7 +443,7 @@ export function CollectionProgressChart({
                 {/* Chart */}
                 <div className="mt-5">
                     {chartData.length < 2 ? (
-                        <div className="flex min-h-[280px] items-center justify-center rounded-xl border border-dashed border-white/5 bg-white/[0.01]">
+                        <div className="flex min-h-[280px] items-center justify-center rounded-xl border border-white/10 bg-[#111114]">
                             <div className="text-center">
                                 <TrendingUp className="mx-auto h-6 w-6 text-zinc-700" />
 

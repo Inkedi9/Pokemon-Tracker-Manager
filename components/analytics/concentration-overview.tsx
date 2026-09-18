@@ -108,7 +108,7 @@ export function ConcentrationOverview({
 
           <Badge
             variant="outline"
-            className="border-violet-400/20 bg-violet-400/5 text-violet-300"
+            className="border-white/10 bg-white/[0.02] text-zinc-500"
           >
             Répartition
           </Badge>
@@ -121,38 +121,36 @@ export function ConcentrationOverview({
       </div>
 
       {/* Concentration level */}
-      <Card
-        className={`border ${concentrationLevel.className}`}
-      >
+      <Card className="rounded-xl border-white/10 bg-[#111114]">
         <CardContent className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
           <div className="flex items-start gap-3">
-            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-current/20 bg-black/10">
+            <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border ${concentrationLevel.className}`}>
               <ConcentrationIcon className="h-4 w-4" />
             </div>
 
             <div>
               <div className="flex flex-wrap items-center gap-2">
-                <p className="text-xs font-semibold">
+                <p className="text-xs font-semibold text-zinc-200">
                   Concentration : {concentrationLevel.label}
                 </p>
 
                 <Badge
                   variant="outline"
-                  className="border-current/20 bg-black/10 text-[9px]"
+                  className="border-white/10 bg-white/[0.02] text-[9px] text-zinc-500"
                 >
                   Top 5 · {formatPercent(concentration.top5Percentage)}
                 </Badge>
               </div>
 
-              <p className="mt-1 text-[11px] opacity-70">
+              <p className="mt-1 text-[11px] text-zinc-500">
                 {concentrationLevel.description}
               </p>
             </div>
           </div>
           <div className="mt-1">
-            <div className="h-1.5 overflow-hidden rounded-full bg-black/20">
+            <div className="h-1.5 overflow-hidden rounded-full bg-white/5">
               <div
-                className="h-full rounded-full bg-current transition-all"
+                className="h-full rounded-full bg-violet-400/70 transition-all"
                 style={{
                   width: `${Math.min(
                     concentration.top5Percentage,
@@ -265,7 +263,7 @@ export function ConcentrationOverview({
 
                 <Badge
                   variant="outline"
-                  className="shrink-0 border-violet-400/20 bg-violet-400/5 text-violet-300"
+                  className="shrink-0 border-white/10 bg-white/[0.02] text-zinc-500"
                 >
                   {formatPercent(
                     concentration.topCard.percentage

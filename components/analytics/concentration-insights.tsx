@@ -80,29 +80,29 @@ export function ConcentrationInsights({
           return (
             <Card
               key={`${insight.level}-${insight.title}`}
-              className={`border ${config.className}`}
+              className="rounded-xl border-white/10 bg-[#111114]"
             >
               <CardContent className="p-4">
                 <div className="flex items-start gap-3">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-current/20 bg-black/10">
+                  <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border ${config.className}`}>
                     <Icon className="h-4 w-4" />
                   </div>
 
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-2">
-                      <p className="text-xs font-semibold">
+                      <p className="text-xs font-semibold text-zinc-200">
                         {insight.title}
                       </p>
 
                       <Badge
                         variant="outline"
-                        className="border-current/20 bg-black/10 text-[9px]"
+                        className="border-white/10 bg-white/[0.02] text-[9px] text-zinc-500"
                       >
                         {config.label}
                       </Badge>
                     </div>
 
-                    <p className="mt-1.5 text-[11px] leading-relaxed opacity-70">
+                    <p className="mt-1.5 text-[11px] leading-relaxed text-zinc-500">
                       {insight.description}
                     </p>
                   </div>

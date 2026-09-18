@@ -154,7 +154,7 @@ export function CollectionHealthBreakdown({
 
                             <Badge
                                 variant="outline"
-                                className="border-violet-400/20 bg-violet-400/5 text-[10px] text-violet-300"
+                                className="border-white/10 bg-white/[0.02] text-[10px] text-zinc-500"
                             >
                                 M3
                             </Badge>

@@ -39,7 +39,7 @@ export function ProfitabilityDistributionChart({
   }
 
   return (
-    <div className="rounded-xl border border-white/10 bg-white/[0.02] p-4 sm:p-5">
+    <div className="rounded-xl border border-white/10 bg-[#111114] p-4 sm:p-5">
       <div>
         <h3 className="text-xs font-semibold text-zinc-200">
           Distribution de la rentabilité
@@ -92,7 +92,7 @@ export function ProfitabilityDistributionChart({
         {data.map((item, index) => (
           <div
             key={item.name}
-            className="rounded-lg border border-white/5 bg-black/10 p-2.5 text-center"
+            className="rounded-lg border border-white/5 bg-white/[0.02] p-2.5 text-center"
           >
             <div className="flex items-center justify-center gap-1.5">
               <span

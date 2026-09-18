@@ -108,7 +108,7 @@ export function ProfitabilityChart({
   const isEmpty = data.length === 0;
 
   return (
-    <div className="rounded-xl border border-white/10 bg-white/[0.02] p-4 sm:p-5">
+    <div className="rounded-xl border border-white/10 bg-[#111114] p-4 sm:p-5">
       <div>
         <h3 className="text-xs font-semibold text-zinc-200">
           {getChartTitle(mode)}
@@ -127,7 +127,7 @@ export function ProfitabilityChart({
             </p>
 
             <p className="mt-1 text-[10px] text-zinc-700">
-              Modifie le mode d'analyse pour voir d'autres résultats.
+              Modifie le mode d&apos;analyse pour voir d&apos;autres résultats.
             </p>
           </div>
         </div>

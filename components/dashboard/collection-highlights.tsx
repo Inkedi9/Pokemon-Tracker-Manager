@@ -7,6 +7,7 @@ import {
   Layers3,
   Sparkles,
 } from "lucide-react";
+import Image from "next/image";
 
 import {
   Card,
@@ -116,12 +117,15 @@ export function CollectionHighlights({
             </div>
           ) : (
             <div className="flex items-center gap-4">
-              <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-white/10 bg-white/[0.03]">
+              <div className="relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-white/10 bg-white/[0.03]">
                 {mostValuableCard.image ? (
-                  <img
+                  <Image
                     src={mostValuableCard.image}
                     alt={mostValuableCard.name}
-                    className="h-full w-full object-contain"
+                    fill
+                    unoptimized
+                    sizes="64px"
+                    className="object-contain"
                   />
                 ) : (
                   <Crown className="h-6 w-6 text-yellow-400/60" />
@@ -192,12 +196,15 @@ export function CollectionHighlights({
                   key={card.id}
                   className="flex items-center gap-3 rounded-lg border border-white/5 bg-white/[0.02] p-2.5"
                 >
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-md bg-white/[0.03]">
+                  <div className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-md bg-white/[0.03]">
                     {card.image ? (
-                      <img
+                      <Image
                         src={card.image}
                         alt={card.name}
-                        className="h-full w-full object-contain"
+                        fill
+                        unoptimized
+                        sizes="36px"
+                        className="object-contain"
                       />
                     ) : (
                       <Clock3 className="h-4 w-4 text-zinc-700" />

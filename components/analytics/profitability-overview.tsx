@@ -214,7 +214,7 @@ export function ProfitabilityOverview({
 
             <div>
               <p className="text-[10px] uppercase tracking-wider text-zinc-600">
-                À l'équilibre
+                À l&apos;équilibre
               </p>
 
               <p className="mt-0.5 text-lg font-semibold text-zinc-100">

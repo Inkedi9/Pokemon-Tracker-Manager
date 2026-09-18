@@ -59,7 +59,7 @@ export function AdvancedCollectionStats({
 
                     <Badge
                         variant="outline"
-                        className="border-blue-400/20 bg-blue-400/5 text-blue-300"
+                        className="border-white/10 bg-white/[0.02] text-zinc-500"
                     >
                         Structure
                     </Badge>
@@ -73,7 +73,7 @@ export function AdvancedCollectionStats({
 
             {/* Collection volume */}
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                <Card className="border-white/10 bg-white/[0.02]">
+                <Card className="rounded-xl border-white/10 bg-[#111114]">
                     <CardContent className="p-4">
                         <div className="flex items-center gap-2 text-zinc-600">
                             <Package className="h-3.5 w-3.5" />
@@ -89,7 +89,7 @@ export function AdvancedCollectionStats({
                     </CardContent>
                 </Card>
 
-                <Card className="border-white/10 bg-white/[0.02]">
+                <Card className="rounded-xl border-white/10 bg-[#111114]">
                     <CardContent className="p-4">
                         <div className="flex items-center gap-2 text-zinc-600">
                             <Boxes className="h-3.5 w-3.5" />
@@ -105,7 +105,7 @@ export function AdvancedCollectionStats({
                     </CardContent>
                 </Card>
 
-                <Card className="border-white/10 bg-white/[0.02]">
+                <Card className="rounded-xl border-white/10 bg-[#111114]">
                     <CardContent className="p-4">
                         <div className="flex items-center gap-2 text-zinc-600">
                             <Layers3 className="h-3.5 w-3.5" />
@@ -121,7 +121,7 @@ export function AdvancedCollectionStats({
                     </CardContent>
                 </Card>
 
-                <Card className="border-white/10 bg-white/[0.02]">
+                <Card className="rounded-xl border-white/10 bg-[#111114]">
                     <CardContent className="p-4">
                         <div className="flex items-center gap-2 text-zinc-600">
                             <Languages className="h-3.5 w-3.5" />
@@ -140,7 +140,7 @@ export function AdvancedCollectionStats({
 
             {/* Average values */}
             <div className="mt-3 grid gap-3 sm:grid-cols-3">
-                <Card className="border-white/10 bg-white/[0.02]">
+                <Card className="rounded-xl border-white/10 bg-[#111114]">
                     <CardContent className="p-4">
                         <div className="flex items-center gap-2 text-zinc-600">
                             <Wallet className="h-3.5 w-3.5" />
@@ -162,7 +162,7 @@ export function AdvancedCollectionStats({
                     </CardContent>
                 </Card>
 
-                <Card className="border-white/10 bg-white/[0.02]">
+                <Card className="rounded-xl border-white/10 bg-[#111114]">
                     <CardContent className="p-4">
                         <div className="flex items-center gap-2 text-zinc-600">
                             <TrendingUp className="h-3.5 w-3.5" />
@@ -184,7 +184,7 @@ export function AdvancedCollectionStats({
                     </CardContent>
                 </Card>
 
-                <Card className="border-white/10 bg-white/[0.02]">
+                <Card className="rounded-xl border-white/10 bg-[#111114]">
                     <CardContent className="p-4">
                         <div className="flex items-center gap-2 text-zinc-600">
                             <Package className="h-3.5 w-3.5" />
@@ -208,7 +208,7 @@ export function AdvancedCollectionStats({
             </div>
 
             {/* Collection diversity */}
-            <Card className="mt-3 border-white/10 bg-white/[0.02]">
+            <Card className="mt-3 rounded-xl border-white/10 bg-[#111114]">
                 <CardHeader className="border-b border-white/5 px-4 py-3 sm:px-5">
                     <CardTitle className="text-xs font-semibold text-zinc-200">
                         Diversité de la collection
@@ -217,7 +217,7 @@ export function AdvancedCollectionStats({
 
                 <CardContent className="p-4 sm:p-5">
                     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                        <div className="rounded-lg border border-white/5 bg-black/10 p-3">
+                        <div className="rounded-lg border border-white/5 bg-white/[0.02] p-3">
                             <div className="flex items-center gap-2 text-zinc-600">
                                 <Tag className="h-3.5 w-3.5" />
 
@@ -231,7 +231,7 @@ export function AdvancedCollectionStats({
                             </p>
                         </div>
 
-                        <div className="rounded-lg border border-white/5 bg-black/10 p-3">
+                        <div className="rounded-lg border border-white/5 bg-white/[0.02] p-3">
                             <div className="flex items-center gap-2 text-zinc-600">
                                 <Sparkles className="h-3.5 w-3.5" />
 
@@ -245,7 +245,7 @@ export function AdvancedCollectionStats({
                             </p>
                         </div>
 
-                        <div className="rounded-lg border border-white/5 bg-black/10 p-3">
+                        <div className="rounded-lg border border-white/5 bg-white/[0.02] p-3">
                             <div className="flex items-center gap-2 text-zinc-600">
                                 <Package className="h-3.5 w-3.5" />
 
@@ -259,7 +259,7 @@ export function AdvancedCollectionStats({
                             </p>
                         </div>
 
-                        <div className="rounded-lg border border-white/5 bg-black/10 p-3">
+                        <div className="rounded-lg border border-white/5 bg-white/[0.02] p-3">
                             <div className="flex items-center gap-2 text-zinc-600">
                                 <MapPin className="h-3.5 w-3.5" />
 

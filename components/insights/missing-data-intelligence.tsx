@@ -148,7 +148,7 @@ export function MissingDataIntelligence({
 
                             <Badge
                                 variant="outline"
-                                className="border-blue-400/20 bg-blue-400/5 text-[10px] text-blue-300"
+                                className="border-white/10 bg-white/[0.02] text-[10px] text-zinc-500"
                             >
                                 M3.3
                             </Badge>
@@ -344,7 +344,7 @@ export function MissingDataIntelligence({
                         </div>
                     </div>
                 ) : (
-                    <div className="mt-5 flex items-center gap-3 rounded-lg border border-emerald-400/10 bg-emerald-400/[0.03] p-4">
+                    <div className="mt-5 flex items-center gap-3 rounded-xl border border-white/10 bg-[#111114] p-4">
                         <CheckCircle2 className="h-5 w-5 shrink-0 text-emerald-400" />
 
                         <div>
