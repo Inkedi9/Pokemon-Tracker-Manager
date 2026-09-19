@@ -1,3 +1,6 @@
+> En developpement
+> Actif...
+
 # Pokémon Tracker Manager
 
 > Personal Pokémon Card Collection Manager
@@ -16,51 +19,51 @@ Le **M1** constitue la première version fonctionnelle de l'application.
 
 Le dashboard permet de suivre rapidement l'état de la collection :
 
-* Nombre total de cartes
-* Nombre de cartes uniques
-* Montant total investi
-* Valeur estimée actuelle
-* Profit estimé
-* ROI
-* Répartition par langue
-* Répartition par rareté
-* Carte la plus valorisée
-* Ajouts récents
-* Collection Insights
+- Nombre total de cartes
+- Nombre de cartes uniques
+- Montant total investi
+- Valeur estimée actuelle
+- Profit estimé
+- ROI
+- Répartition par langue
+- Répartition par rareté
+- Carte la plus valorisée
+- Ajouts récents
+- Collection Insights
 
 ### 🗂️ Collection
 
 La page Collection permet de gérer les cartes :
 
-* Ajouter une carte
-* Modifier une carte
-* Supprimer une carte
-* Rechercher une carte
-* Filtrer par :
+- Ajouter une carte
+- Modifier une carte
+- Supprimer une carte
+- Rechercher une carte
+- Filtrer par :
+  - Langue
+  - Rareté
+  - État
+  - Extension
 
-  * Langue
-  * Rareté
-  * État
-  * Extension
-* Trier par :
+- Trier par :
+  - Plus récent
+  - Nom
+  - Valeur
+  - Extension
+  - Numéro
 
-  * Plus récent
-  * Nom
-  * Valeur
-  * Extension
-  * Numéro
-* Affichage responsive de la collection
-* Compteur de résultats
-* Filtres actifs
-* Reset des filtres
+- Affichage responsive de la collection
+- Compteur de résultats
+- Filtres actifs
+- Reset des filtres
 
 ### 💾 Persistance
 
 Les données sont actuellement stockées localement avec :
 
-* `localStorage`
-* Données initiales dans `data/cards.json`
-* `CollectionProvider` pour centraliser la gestion de la collection
+- `localStorage`
+- Données initiales dans `data/cards.json`
+- `CollectionProvider` pour centraliser la gestion de la collection
 
 Aucun compte ou backend n'est nécessaire pour cette version.
 
@@ -70,27 +73,27 @@ Aucun compte ou backend n'est nécessaire pour cette version.
 
 Design basé sur une esthétique :
 
-* Dark / Obsidian
-* Minimaliste
-* Inspirée des interfaces de gestion et dashboards
-* Responsive desktop / tablette / mobile
-* Coins légèrement arrondis
-* Bordures et effets subtils
-* Icônes Lucide
-* Composants shadcn/ui
+- Dark / Obsidian
+- Minimaliste
+- Inspirée des interfaces de gestion et dashboards
+- Responsive desktop / tablette / mobile
+- Coins légèrement arrondis
+- Bordures et effets subtils
+- Icônes Lucide
+- Composants shadcn/ui
 
 ---
 
 ## 🛠️ Stack
 
-* **Next.js**
-* **React**
-* **TypeScript**
-* **Tailwind CSS**
-* **shadcn/ui**
-* **Lucide React**
-* **Recharts**
-* **localStorage**
+- **Next.js**
+- **React**
+- **TypeScript**
+- **Tailwind CSS**
+- **shadcn/ui**
+- **Lucide React**
+- **Recharts**
+- **localStorage**
 
 ---
 
@@ -180,49 +183,49 @@ npm run build
 
 ### ✅ M0 — Foundation
 
-* [x] Initial project
-* [x] Layout
-* [x] Navigation
-* [x] Data model
-* [x] Local storage
-* [x] Collection provider
+- [x] Initial project
+- [x] Layout
+- [x] Navigation
+- [x] Data model
+- [x] Local storage
+- [x] Collection provider
 
 ### ✅ M1 — Collection & Dashboard
 
-* [x] Dashboard
-* [x] Collection management
-* [x] Add / Edit / Delete
-* [x] Search
-* [x] Filters
-* [x] Sorting
-* [x] Financial overview
-* [x] Language statistics
-* [x] Rarity statistics
-* [x] Collection insights
-* [x] Responsive UI
-* [x] Footer
+- [x] Dashboard
+- [x] Collection management
+- [x] Add / Edit / Delete
+- [x] Search
+- [x] Filters
+- [x] Sorting
+- [x] Financial overview
+- [x] Language statistics
+- [x] Rarity statistics
+- [x] Collection insights
+- [x] Responsive UI
+- [x] Footer
 
 ### 🔜 M2 — Collection Intelligence
 
-* [ ] Analyse avancée de la collection
-* [ ] Détection des doublons
-* [ ] Statistiques par extension
-* [ ] Analyse de valeur par extension
-* [ ] Cartes les plus rentables
-* [ ] Concentration de la valeur
-* [ ] Statistiques avancées
+- [ ] Analyse avancée de la collection
+- [ ] Détection des doublons
+- [ ] Statistiques par extension
+- [ ] Analyse de valeur par extension
+- [ ] Cartes les plus rentables
+- [ ] Concentration de la valeur
+- [ ] Statistiques avancées
 
 ### 🔮 Future
 
-* [ ] Base de données
-* [ ] API Pokémon
-* [ ] Prix de marché
-* [ ] Historique des prix
-* [ ] Scanner / identification de cartes
-* [ ] Import / export
-* [ ] Gestion des classeurs et emplacements
-* [ ] Authentification
-* [ ] Synchronisation cloud
+- [ ] Base de données
+- [ ] API Pokémon
+- [ ] Prix de marché
+- [ ] Historique des prix
+- [ ] Scanner / identification de cartes
+- [ ] Import / export
+- [ ] Gestion des classeurs et emplacements
+- [ ] Authentification
+- [ ] Synchronisation cloud
 
 ---
 
