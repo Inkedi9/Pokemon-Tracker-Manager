@@ -205,17 +205,17 @@ npm run build
 - [x] Responsive UI
 - [x] Footer
 
-### 🔜 M2 — Collection Intelligence
+### M2 — Collection Intelligence
 
-- [ ] Analyse avancée de la collection
-- [ ] Détection des doublons
-- [ ] Statistiques par extension
-- [ ] Analyse de valeur par extension
-- [ ] Cartes les plus rentables
-- [ ] Concentration de la valeur
-- [ ] Statistiques avancées
+- [x] Analyse avancée de la collection
+- [x] Détection des doublons
+- [x] Statistiques par extension
+- [x] Analyse de valeur par extension
+- [x] Cartes les plus rentables
+- [x] Concentration de la valeur
+- [x] Statistiques avancées
 
-### 🔮 Future
+### 🔜 🔮 Future
 
 - [ ] Base de données
 - [ ] API Pokémon
@@ -226,6 +226,8 @@ npm run build
 - [ ] Gestion des classeurs et emplacements
 - [ ] Authentification
 - [ ] Synchronisation cloud
+
+ROADMAP global - [ROADMAP](./ROADMAP.md)
 
 ---
 
