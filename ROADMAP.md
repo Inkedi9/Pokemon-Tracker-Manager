@@ -44,7 +44,6 @@
 - [x] M3.6 — Smart Recommendations
 - [x] M3.7 — Intelligence Dashboard
 - [x] M3 Final — UX / polish / intégration
-
 - [x] Harmonisation + responsive + empty states + build final.
 
 ### M4 — Collection UX & Workflow
@@ -56,6 +55,8 @@
 - [ ] M4.5 Bulk Edit
 - [ ] M4.6 Import / Export
 - [ ] M4.7 Collection Workflow
+
+### 🔜 Futur
 
 - [ ] M5 Market / Pricing
 
