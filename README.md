@@ -181,40 +181,6 @@ npm run build
 
 ## 🗺️ Roadmap
 
-### ✅ M0 — Foundation
-
-- [x] Initial project
-- [x] Layout
-- [x] Navigation
-- [x] Data model
-- [x] Local storage
-- [x] Collection provider
-
-### ✅ M1 — Collection & Dashboard
-
-- [x] Dashboard
-- [x] Collection management
-- [x] Add / Edit / Delete
-- [x] Search
-- [x] Filters
-- [x] Sorting
-- [x] Financial overview
-- [x] Language statistics
-- [x] Rarity statistics
-- [x] Collection insights
-- [x] Responsive UI
-- [x] Footer
-
-### M2 — Collection Intelligence
-
-- [x] Analyse avancée de la collection
-- [x] Détection des doublons
-- [x] Statistiques par extension
-- [x] Analyse de valeur par extension
-- [x] Cartes les plus rentables
-- [x] Concentration de la valeur
-- [x] Statistiques avancées
-
 ### 🔜 🔮 Future
 
 - [ ] Base de données
