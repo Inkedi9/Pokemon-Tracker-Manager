@@ -23,8 +23,7 @@
 - [x] Collection insights
 - [x] Responsive UI
 - [x] Footer
-
-- [x] M1.9 Dashboard avancé
+- [x] Dashboard avancé
 
 ### ✅ M2 — Collection Intelligence
 
