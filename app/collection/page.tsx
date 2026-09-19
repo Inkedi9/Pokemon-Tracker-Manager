@@ -182,18 +182,18 @@ export default function CollectionPage() {
     return (
         <div className="p-4 sm:p-6 lg:p-8">
             {/* Header */}
-            <div className="mb-8">
-                <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+            <div className="mb-6 sm:mb-8">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
                     <div>
-                        <p className="mb-2 text-xs font-medium uppercase tracking-[0.2em] text-yellow-400">
+                        <p className="mb-2 text-[10px] font-medium uppercase tracking-[0.2em] text-violet-400/80">
                             Collection
                         </p>
 
-                        <h2 className="text-3xl font-bold tracking-tight text-white">
+                        <h2 className="text-2xl font-semibold tracking-tight text-zinc-100 sm:text-3xl">
                             Mes cartes
                         </h2>
 
-                        <p className="mt-2 text-sm text-zinc-500">
+                        <p className="mt-2 max-w-xl text-xs text-zinc-500 sm:text-sm">
                             Gérez et suivez votre collection Pokémon.
                         </p>
                     </div>
@@ -203,57 +203,57 @@ export default function CollectionPage() {
             </div>
 
             {/* Statistics */}
-            <div className="mb-6 grid gap-4 sm:grid-cols-3">
+            <div className="mb-6 grid gap-3 sm:grid-cols-3">
                 <Card className="rounded-xl border-white/10 bg-[#111114] p-4">
-                    <div className="flex items-center justify-between">
-                        <div>
-                            <p className="text-[10px] uppercase tracking-[0.15em] text-zinc-600">
+                    <div className="flex items-center justify-between gap-4">
+                        <div className="min-w-0">
+                            <p className="text-[10px] font-medium uppercase tracking-[0.15em] text-zinc-600">
                                 Total cartes
                             </p>
 
-                            <p className="mt-2 text-2xl font-bold text-white">
+                            <p className="mt-2 text-xl font-semibold tracking-tight text-zinc-100 sm:text-2xl">
                                 {totalCards}
                             </p>
                         </div>
 
-                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-yellow-400/10">
-                            <Package className="h-5 w-5 text-yellow-400" />
+                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-blue-400/10 bg-blue-400/5">
+                            <Package className="h-4 w-4 text-blue-400/80" />
                         </div>
                     </div>
                 </Card>
 
                 <Card className="rounded-xl border-white/10 bg-[#111114] p-4">
-                    <div className="flex items-center justify-between">
-                        <div>
-                            <p className="text-[10px] uppercase tracking-[0.15em] text-zinc-600">
+                    <div className="flex items-center justify-between gap-4">
+                        <div className="min-w-0">
+                            <p className="text-[10px] font-medium uppercase tracking-[0.15em] text-zinc-600">
                                 Cartes uniques
                             </p>
 
-                            <p className="mt-2 text-2xl font-bold text-white">
+                            <p className="mt-2 text-xl font-semibold tracking-tight text-zinc-100 sm:text-2xl">
                                 {uniqueCards}
                             </p>
                         </div>
 
-                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-violet-400/10">
-                            <Layers3 className="h-5 w-5 text-violet-400" />
+                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-violet-400/10 bg-violet-400/5">
+                            <Layers3 className="h-4 w-4 text-violet-400/80" />
                         </div>
                     </div>
                 </Card>
 
                 <Card className="rounded-xl border-white/10 bg-[#111114] p-4">
-                    <div className="flex items-center justify-between">
-                        <div>
-                            <p className="text-[10px] uppercase tracking-[0.15em] text-zinc-600">
+                    <div className="flex items-center justify-between gap-4">
+                        <div className="min-w-0">
+                            <p className="text-[10px] font-medium uppercase tracking-[0.15em] text-zinc-600">
                                 Valeur estimée
                             </p>
 
-                            <p className="mt-2 text-2xl font-bold text-emerald-400">
+                            <p className="mt-2 text-xl font-semibold tracking-tight text-emerald-400 sm:text-2xl">
                                 {estimatedValue.toFixed(2)} €
                             </p>
                         </div>
 
-                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-400/10">
-                            <Wallet className="h-5 w-5 text-emerald-400" />
+                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-emerald-400/10 bg-emerald-400/5">
+                            <Wallet className="h-4 w-4 text-emerald-400/80" />
                         </div>
                     </div>
                 </Card>
@@ -264,23 +264,32 @@ export default function CollectionPage() {
                 {/* Search */}
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                     <div className="relative flex-1">
-                        <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-zinc-600" />
+                        <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-zinc-600" />
 
                         <Input
                             value={search}
-                            onChange={(event) =>
-                                setSearch(event.target.value)
-                            }
+                            onChange={(event) => setSearch(event.target.value)}
                             placeholder="Rechercher un Pokémon, une extension ou un numéro..."
-                            className="h-10 border-white/10 bg-[#111114] pl-10 text-white placeholder:text-zinc-600"
+                            className="h-11 rounded-xl border-white/10 bg-[#111114] pl-10 pr-10 text-sm text-zinc-100 placeholder:text-zinc-600 transition-colors focus:border-violet-400/30 focus:ring-1 focus:ring-violet-400/10"
                         />
+
+                        {search && (
+                            <button
+                                type="button"
+                                onClick={() => setSearch("")}
+                                aria-label="Effacer la recherche"
+                                className="absolute right-3 top-1/2 flex h-6 w-6 -translate-y-1/2 items-center justify-center rounded-md text-zinc-600 transition-colors hover:bg-white/5 hover:text-zinc-300"
+                            >
+                                <X className="h-3.5 w-3.5" />
+                            </button>
+                        )}
                     </div>
 
                     {hasActiveFilters && (
                         <button
                             type="button"
                             onClick={resetFilters}
-                            className="flex h-10 items-center gap-2 rounded-md border border-white/10 bg-[#111114] px-3 text-xs text-zinc-400 transition hover:bg-white/5 hover:text-white"
+                            className="flex h-11 shrink-0 items-center justify-center gap-2 rounded-xl border border-white/10 bg-[#111114] px-3.5 text-xs text-zinc-400 transition-colors hover:border-white/15 hover:bg-white/[0.04] hover:text-zinc-200"
                         >
                             <RotateCcw className="h-3.5 w-3.5" />
                             Réinitialiser
@@ -289,151 +298,133 @@ export default function CollectionPage() {
                 </div>
 
                 {/* Filters */}
-                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                    {/* Language */}
-                    <Select
-                        value={language}
-                        onValueChange={(value) =>
-                            setLanguage(value ?? "")
-                        }
-                    >
-                        <SelectTrigger className="rounded-xl border-white/10 bg-[#111114] text-white">
-                            <SelectValue placeholder="Toutes les langues" />
-                        </SelectTrigger>
+                <div className="rounded-xl border border-white/10 bg-[#111114] p-3 sm:p-4">
+                    <div className="mb-3 flex items-center justify-between gap-3">
+                        <div>
+                            <p className="text-[10px] font-medium uppercase tracking-[0.15em] text-zinc-600">
+                                Filtres
+                            </p>
 
-                        <SelectContent>
-                            <SelectItem value="FR">
-                                Français
-                            </SelectItem>
+                            <p className="mt-1 text-xs text-zinc-500">
+                                Affinez votre collection
+                            </p>
+                        </div>
 
-                            <SelectItem value="EN">
-                                Anglais
-                            </SelectItem>
+                        {hasActiveFilters && (
+                            <button
+                                type="button"
+                                onClick={resetFilters}
+                                className="text-[11px] text-zinc-600 transition-colors hover:text-zinc-300"
+                            >
+                                Réinitialiser
+                            </button>
+                        )}
+                    </div>
 
-                            <SelectItem value="JP">
-                                Japonais
-                            </SelectItem>
+                    <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-4">
+                        {/* Language */}
+                        <Select
+                            value={language}
+                            onValueChange={(value) => setLanguage(value ?? "")}
+                        >
+                            <SelectTrigger
+                                className={`h-10 rounded-lg border-white/10 bg-white/[0.02] text-xs text-zinc-300 transition-colors ${language
+                                        ? "border-violet-400/20 text-zinc-100"
+                                        : ""
+                                    }`}
+                            >
+                                <SelectValue placeholder="Toutes les langues" />
+                            </SelectTrigger>
 
-                            <SelectItem value="KR">
-                                Coréen
-                            </SelectItem>
+                            <SelectContent>
+                                <SelectItem value="FR">Français</SelectItem>
+                                <SelectItem value="EN">Anglais</SelectItem>
+                                <SelectItem value="JP">Japonais</SelectItem>
+                                <SelectItem value="KR">Coréen</SelectItem>
+                                <SelectItem value="DE">Allemand</SelectItem>
+                                <SelectItem value="ES">Espagnol</SelectItem>
+                                <SelectItem value="IT">Italien</SelectItem>
+                            </SelectContent>
+                        </Select>
 
-                            <SelectItem value="DE">
-                                Allemand
-                            </SelectItem>
+                        {/* Rarity */}
+                        <Select
+                            value={rarity}
+                            onValueChange={(value) => setRarity(value ?? "")}
+                        >
+                            <SelectTrigger
+                                className={`h-10 rounded-lg border-white/10 bg-white/[0.02] text-xs text-zinc-300 transition-colors ${rarity
+                                        ? "border-violet-400/20 text-zinc-100"
+                                        : ""
+                                    }`}
+                            >
+                                <SelectValue placeholder="Toutes les raretés" />
+                            </SelectTrigger>
 
-                            <SelectItem value="ES">
-                                Espagnol
-                            </SelectItem>
-
-                            <SelectItem value="IT">
-                                Italien
-                            </SelectItem>
-                        </SelectContent>
-                    </Select>
-
-                    {/* Rarity */}
-                    <Select
-                        value={rarity}
-                        onValueChange={(value) =>
-                            setRarity(value ?? "")
-                        }
-                    >
-                        <SelectTrigger className="border-white/10 bg-[#111114] text-white">
-                            <SelectValue placeholder="Toutes les raretés" />
-                        </SelectTrigger>
-
-                        <SelectContent>
-                            <SelectItem value="Common">
-                                Commune
-                            </SelectItem>
-
-                            <SelectItem value="Uncommon">
-                                Peu commune
-                            </SelectItem>
-
-                            <SelectItem value="Rare">
-                                Rare
-                            </SelectItem>
-
-                            <SelectItem value="Holo Rare">
-                                Holo Rare
-                            </SelectItem>
-
-                            <SelectItem value="Ultra Rare">
-                                Ultra Rare
-                            </SelectItem>
-
-                            <SelectItem value="Illustration Rare">
-                                Illustration Rare
-                            </SelectItem>
-
-                            <SelectItem value="Special Illustration Rare">
-                                Special Illustration Rare
-                            </SelectItem>
-
-                            <SelectItem value="Hyper Rare">
-                                Hyper Rare
-                            </SelectItem>
-                        </SelectContent>
-                    </Select>
-
-                    {/* Condition */}
-                    <Select
-                        value={condition}
-                        onValueChange={(value) =>
-                            setCondition(value ?? "")
-                        }
-                    >
-                        <SelectTrigger className="border-white/10 bg-[#111114] text-white">
-                            <SelectValue placeholder="Tous les états" />
-                        </SelectTrigger>
-
-                        <SelectContent>
-                            <SelectItem value="NM">
-                                NM — Near Mint
-                            </SelectItem>
-
-                            <SelectItem value="LP">
-                                LP — Lightly Played
-                            </SelectItem>
-
-                            <SelectItem value="MP">
-                                MP — Moderately Played
-                            </SelectItem>
-
-                            <SelectItem value="HP">
-                                HP — Heavily Played
-                            </SelectItem>
-
-                            <SelectItem value="DMG">
-                                DMG — Damaged
-                            </SelectItem>
-                        </SelectContent>
-                    </Select>
-
-                    {/* Set */}
-                    <Select
-                        value={setFilter}
-                        onValueChange={(value) =>
-                            setSetFilter(value ?? "")
-                        }
-                    >
-                        <SelectTrigger className="border-white/10 bg-[#111114] text-white">
-                            <SelectValue placeholder="Toutes les extensions" />
-                        </SelectTrigger>
-
-                        <SelectContent>
-                            {extensions.map((extension) => (
-                                <SelectItem
-                                    key={extension}
-                                    value={extension}
-                                >
-                                    {extension}
+                            <SelectContent>
+                                <SelectItem value="Common">Commune</SelectItem>
+                                <SelectItem value="Uncommon">Peu commune</SelectItem>
+                                <SelectItem value="Rare">Rare</SelectItem>
+                                <SelectItem value="Holo Rare">Holo Rare</SelectItem>
+                                <SelectItem value="Ultra Rare">Ultra Rare</SelectItem>
+                                <SelectItem value="Illustration Rare">
+                                    Illustration Rare
                                 </SelectItem>
-                            ))}
-                        </SelectContent>
-                    </Select>
+                                <SelectItem value="Special Illustration Rare">
+                                    Special Illustration Rare
+                                </SelectItem>
+                                <SelectItem value="Hyper Rare">Hyper Rare</SelectItem>
+                            </SelectContent>
+                        </Select>
+
+                        {/* Condition */}
+                        <Select
+                            value={condition}
+                            onValueChange={(value) => setCondition(value ?? "")}
+                        >
+                            <SelectTrigger
+                                className={`h-10 rounded-lg border-white/10 bg-white/[0.02] text-xs text-zinc-300 transition-colors ${condition
+                                        ? "border-violet-400/20 text-zinc-100"
+                                        : ""
+                                    }`}
+                            >
+                                <SelectValue placeholder="Tous les états" />
+                            </SelectTrigger>
+
+                            <SelectContent>
+                                <SelectItem value="NM">NM — Near Mint</SelectItem>
+                                <SelectItem value="LP">LP — Lightly Played</SelectItem>
+                                <SelectItem value="MP">
+                                    MP — Moderately Played
+                                </SelectItem>
+                                <SelectItem value="HP">HP — Heavily Played</SelectItem>
+                                <SelectItem value="DMG">DMG — Damaged</SelectItem>
+                            </SelectContent>
+                        </Select>
+
+                        {/* Set */}
+                        <Select
+                            value={setFilter}
+                            onValueChange={(value) => setSetFilter(value ?? "")}
+                        >
+                            <SelectTrigger
+                                className={`h-10 rounded-lg border-white/10 bg-white/[0.02] text-xs text-zinc-300 transition-colors ${setFilter
+                                        ? "border-violet-400/20 text-zinc-100"
+                                        : ""
+                                    }`}
+                            >
+                                <SelectValue placeholder="Toutes les extensions" />
+                            </SelectTrigger>
+
+                            <SelectContent>
+                                {extensions.map((extension) => (
+                                    <SelectItem key={extension} value={extension}>
+                                        {extension}
+                                    </SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
+                    </div>
                 </div>
 
                 {/* Results count */}
