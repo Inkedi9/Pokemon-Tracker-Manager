@@ -55,9 +55,11 @@
 - [x] M4.5 Bulk Edit
 - [x] M4.6 Collection Workflow
 
-### 🔜 Futur
+### 🔜 M5 Market / Pricing
 
-- [ ] M5 Market / Pricing
+- [ ] M5.1 Market - Pricing
+
+### 🔜 Futur
 
 - [ ] M6 Import / Export
 
