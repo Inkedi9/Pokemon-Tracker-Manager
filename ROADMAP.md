@@ -57,7 +57,12 @@
 
 ### 🔜 M5 Market / Pricing
 
-- [ ] M5.1 Market - Pricing
+- [ ] M5.1 Pricing Core
+- [ ] M5.2 Market Value
+- [ ] M5.3 Price History
+- [ ] M5.4 Pricing Intelligence
+- [ ] M5.5 Market Dashboard
+- [ ] M5.6 Pricing UX
 
 ### 🔜 Futur
 
