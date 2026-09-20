@@ -15,6 +15,7 @@ type CollectionContextType = {
   addCard: (card: PokemonCard) => void;
   updateCard: (card: PokemonCard) => void;
   deleteCard: (cardId: string) => void;
+  deleteCards: (cardIds: string[]) => void;
   clearCollection: () => void;
 };
 
@@ -88,6 +89,14 @@ export function CollectionProvider({
     );
   }
 
+  function deleteCards(cardIds: string[]) {
+    const ids = new Set(cardIds);
+
+    setCards((current) =>
+      current.filter((card) => !ids.has(card.id))
+    );
+  }
+
   function clearCollection() {
     setCards([]);
     localStorage.removeItem(STORAGE_KEY);
@@ -100,6 +109,7 @@ export function CollectionProvider({
         addCard,
         updateCard,
         deleteCard,
+        deleteCards,
         clearCollection,
       }}
     >

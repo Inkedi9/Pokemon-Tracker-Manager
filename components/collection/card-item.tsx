@@ -1,10 +1,12 @@
 "use client";
 
 import {
+    Check,
     MapPin,
     Package,
     Star,
 } from "lucide-react";
+
 import Image from "next/image";
 
 import { Card } from "@/components/ui/card";
@@ -16,27 +18,48 @@ import { DeleteCardDialog } from "@/components/collection/delete-card-dialog";
 
 type CardItemProps = {
     card: PokemonCard;
+    isSelected: boolean;
+    onSelect: () => void;
 };
 
-export function CardItem({ card }: CardItemProps) {
+export function CardItem({ card, isSelected, onSelect, }: CardItemProps) {
     return (
         <Card
-            className="
-        overflow-hidden
-        rounded-xl
-        border-white/10
-        bg-[#111114]
-        transition-all
-        duration-200
-        hover:-translate-y-0.5
-        hover:border-white/15
-        hover:bg-[#141418]
-        hover:shadow-lg
-        hover:shadow-black/20
-    "
+            className={`
+    overflow-hidden
+    rounded-xl
+    border
+    bg-[#111114]
+    transition-all
+    duration-200
+    ${isSelected
+                    ? "border-violet-400/40 shadow-lg shadow-violet-950/10"
+                    : "border-white/10"
+                }
+    hover:-translate-y-0.5
+    hover:border-white/15
+    hover:bg-[#141418]
+    hover:shadow-lg
+    hover:shadow-black/20
+`}
         >
             {/* Image */}
             <div className="relative aspect-[3/4] items-center justify-center bg-[#18181b]">
+                <button
+                    type="button"
+                    onClick={onSelect}
+                    aria-label={
+                        isSelected
+                            ? `Désélectionner ${card.name}`
+                            : `Sélectionner ${card.name}`
+                    }
+                    className={`absolute left-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-lg border backdrop-blur-sm transition-all ${isSelected
+                        ? "border-violet-400/40 bg-violet-400/20 text-violet-300 shadow-lg shadow-violet-950/20"
+                        : "border-white/10 bg-black/40 text-white/40 hover:border-white/20 hover:bg-black/60 hover:text-white"
+                        }`}
+                >
+                    {isSelected && <Check className="h-4 w-4" />}
+                </button>
                 {card.image ? (
                     <Image
                         src={card.image}
