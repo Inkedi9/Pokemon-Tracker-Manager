@@ -27,6 +27,12 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 
+import type {
+    CardCondition,
+    CardLanguage,
+    PokemonCard,
+} from "@/types/card";
+
 import { useCollection } from "@/components/collection/collection-provider";
 import { AddCardDialog } from "@/components/collection/add-card-dialog";
 import { CardItem } from "@/components/collection/card-item";
@@ -47,9 +53,12 @@ import {
     Dialog,
     DialogContent,
     DialogDescription,
+    DialogFooter,
     DialogHeader,
     DialogTitle,
 } from "@/components/ui/dialog";
+
+import { toast } from "sonner";
 
 type AdvancedFilters = {
     minQuantity: string;
@@ -64,11 +73,22 @@ type AdvancedFilters = {
     hasEstimatedValue: string;
 };
 
+type BulkEditValues = {
+    language: CardLanguage | "";
+    rarity: string;
+    condition: CardCondition | "";
+    location: string;
+};
+
+type BulkAction = "edit" | "delete" | null;
+
 export default function CollectionPage() {
+
     const {
         cards,
         deleteCard,
         deleteCards,
+        updateCard,
     } = useCollection();
 
     const [search, setSearch] = useState("");
@@ -107,6 +127,20 @@ export default function CollectionPage() {
 
     const [selectedCardIds, setSelectedCardIds] =
         useState<string[]>([]);
+
+    const [showBulkEditDialog, setShowBulkEditDialog] =
+        useState(false);
+
+    const [showBulkDeleteDialog, setShowBulkDeleteDialog] =
+        useState(false);
+
+    const [bulkEditValues, setBulkEditValues] =
+        useState<BulkEditValues>({
+            language: "",
+            rarity: "",
+            condition: "",
+            location: "",
+        });
 
     const totalCards = getTotalCards(cards);
     const uniqueCards = getUniqueCards(cards);
@@ -654,11 +688,20 @@ export default function CollectionPage() {
         setSelectedCardIds([]);
     }
 
-    function handleBulkDelete() {
+    function confirmBulkDelete() {
         if (selectedCardIds.length === 0) return;
+
+        const selectedCount = selectedCardIds.length;
 
         deleteCards(selectedCardIds);
         clearSelection();
+        setActiveBulkAction(null);
+        setShowBulkDeleteDialog(false);
+
+        toast.success(
+            `${selectedCount} ${selectedCount > 1 ? "cartes supprimées" : "carte supprimée"
+            }`
+        );
     }
 
     const allVisibleCardsSelected =
@@ -696,6 +739,80 @@ export default function CollectionPage() {
             return Array.from(ids);
         });
     }
+
+    function updateBulkEditValue(
+        key: keyof BulkEditValues,
+        value: string
+    ) {
+        setBulkEditValues((current) => ({
+            ...current,
+            [key]: value,
+        }));
+    }
+
+    function resetBulkEdit() {
+        setBulkEditValues({
+            language: "",
+            rarity: "",
+            condition: "",
+            location: "",
+        });
+
+        setActiveBulkAction(null);
+        setShowBulkEditDialog(false);
+    }
+
+    function handleBulkEdit() {
+        if (selectedCardIds.length === 0) return;
+
+        const selectedCount = selectedCardIds.length;
+
+        const hasChanges = Object.values(bulkEditValues).some(
+            (value) => value !== ""
+        );
+
+        if (!hasChanges) {
+            toast.error("Aucune modification à appliquer");
+            return;
+        }
+
+        cards
+            .filter((card) => selectedCardIds.includes(card.id))
+            .forEach((card) => {
+                updateCard({
+                    ...card,
+                    language:
+                        bulkEditValues.language !== ""
+                            ? bulkEditValues.language
+                            : card.language,
+                    rarity:
+                        bulkEditValues.rarity !== ""
+                            ? bulkEditValues.rarity
+                            : card.rarity,
+                    condition:
+                        bulkEditValues.condition !== ""
+                            ? bulkEditValues.condition
+                            : card.condition,
+                    location:
+                        bulkEditValues.location !== ""
+                            ? bulkEditValues.location
+                            : card.location,
+                });
+            });
+
+        resetBulkEdit();
+        clearSelection();
+
+        toast.success(
+            `${selectedCount} ${selectedCount > 1 ? "cartes modifiées" : "carte modifiée"
+            }`
+        );
+    }
+
+    const [activeBulkAction, setActiveBulkAction] =
+        useState<BulkAction>(null);
+
+
 
     return (
         <div className="px-4 py-5 sm:px-6 sm:py-6 lg:px-8 lg:py-8">
@@ -1496,6 +1613,18 @@ export default function CollectionPage() {
 
                                 <button
                                     type="button"
+                                    onClick={() => {
+                                        setActiveBulkAction("edit");
+                                        setShowBulkEditDialog(true);
+                                    }}
+                                    className="inline-flex h-8 items-center gap-1.5 rounded-lg border border-violet-400/20 bg-violet-400/5 px-2.5 text-[11px] font-medium text-violet-300 transition hover:bg-violet-400/10 hover:text-violet-200"
+                                >
+                                    <Pencil className="h-3 w-3" />
+                                    Modifier
+                                </button>
+
+                                <button
+                                    type="button"
                                     onClick={clearSelection}
                                     className="inline-flex h-8 items-center gap-1.5 rounded-lg border border-white/10 px-2.5 text-[11px] font-medium text-white/50 transition hover:bg-white/5 hover:text-white"
                                 >
@@ -1505,7 +1634,10 @@ export default function CollectionPage() {
 
                                 <button
                                     type="button"
-                                    onClick={handleBulkDelete}
+                                    onClick={() => {
+                                        setActiveBulkAction("delete");
+                                        setShowBulkDeleteDialog(true);
+                                    }}
                                     className="inline-flex h-8 items-center gap-1.5 rounded-lg border border-red-400/20 bg-red-400/5 px-2.5 text-[11px] font-medium text-red-400/80 transition hover:bg-red-400/10 hover:text-red-400"
                                 >
                                     <Trash2 className="h-3 w-3" />
@@ -1639,6 +1771,373 @@ export default function CollectionPage() {
                             </button>
                         </div>
                     </div>
+                </DialogContent>
+            </Dialog>
+            <Dialog
+                open={showBulkEditDialog}
+                onOpenChange={(open) => {
+                    if (!open) {
+                        resetBulkEdit();
+                    } else {
+                        setShowBulkEditDialog(true);
+                    }
+                }}
+            >
+                <DialogContent className="border-white/10 bg-[#111114] text-white sm:max-w-lg">
+                    <DialogHeader>
+                        <DialogTitle>
+                            Modifier les cartes sélectionnées
+                        </DialogTitle>
+
+                        <DialogDescription className="text-zinc-500">
+                            Modifie les propriétés communes de{" "}
+                            {selectedCardIds.length}{" "}
+                            {selectedCardIds.length > 1
+                                ? "cartes"
+                                : "carte"}
+                            .
+                            <br />
+                            Les champs laissés vides resteront inchangés.
+                        </DialogDescription>
+                    </DialogHeader>
+
+                    {Object.values(bulkEditValues).some(
+                        (value) => value !== ""
+                    ) && (
+                            <div className="rounded-xl border border-violet-400/15 bg-violet-400/[0.04] p-4">
+                                <div className="flex items-start gap-3">
+                                    <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-violet-400/10 text-violet-300">
+                                        <Pencil className="h-3.5 w-3.5" />
+                                    </div>
+
+                                    <div className="min-w-0">
+                                        <p className="text-xs font-medium text-white">
+                                            Aperçu des modifications
+                                        </p>
+
+                                        <p className="mt-1 text-[11px] text-zinc-500">
+                                            Ces modifications seront appliquées à{" "}
+                                            {selectedCardIds.length}{" "}
+                                            {selectedCardIds.length > 1
+                                                ? "cartes"
+                                                : "carte"}
+                                            .
+                                        </p>
+
+                                        <div className="mt-3 space-y-2">
+                                            {bulkEditValues.language !== "" && (
+                                                <div className="flex items-center justify-between gap-4 text-xs">
+                                                    <span className="text-zinc-500">
+                                                        Langue
+                                                    </span>
+
+                                                    <span className="font-medium text-violet-300">
+                                                        {bulkEditValues.language}
+                                                    </span>
+                                                </div>
+                                            )}
+
+                                            {bulkEditValues.rarity !== "" && (
+                                                <div className="flex items-center justify-between gap-4 text-xs">
+                                                    <span className="text-zinc-500">
+                                                        Rareté
+                                                    </span>
+
+                                                    <span className="font-medium text-violet-300">
+                                                        {bulkEditValues.rarity}
+                                                    </span>
+                                                </div>
+                                            )}
+
+                                            {bulkEditValues.condition !== "" && (
+                                                <div className="flex items-center justify-between gap-4 text-xs">
+                                                    <span className="text-zinc-500">
+                                                        Condition
+                                                    </span>
+
+                                                    <span className="font-medium text-violet-300">
+                                                        {bulkEditValues.condition}
+                                                    </span>
+                                                </div>
+                                            )}
+
+                                            {bulkEditValues.location !== "" && (
+                                                <div className="flex items-center justify-between gap-4 text-xs">
+                                                    <span className="text-zinc-500">
+                                                        Localisation
+                                                    </span>
+
+                                                    <span className="font-medium text-violet-300">
+                                                        {bulkEditValues.location}
+                                                    </span>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                    <div className="space-y-5 py-4">
+                        {/* Langue */}
+                        <div className="space-y-2">
+                            <label className="text-xs font-medium text-zinc-300">
+                                Langue
+                            </label>
+
+                            <select
+                                value={bulkEditValues.language}
+                                onChange={(event) =>
+                                    updateBulkEditValue(
+                                        "language",
+                                        event.target.value
+                                    )
+                                }
+                                className="h-10 w-full rounded-lg border border-white/10 bg-[#18181b] px-3 text-sm text-white outline-none transition focus:border-violet-400/40"
+                            >
+                                <option value="">
+                                    Ne pas modifier
+                                </option>
+                                <option value="Français">
+                                    Français
+                                </option>
+                                <option value="Coréen">
+                                    Coréen
+                                </option>
+                                <option value="Japonais">
+                                    Japonais
+                                </option>
+                                <option value="Anglais">
+                                    Anglais
+                                </option>
+                            </select>
+                        </div>
+
+                        {/* Rareté */}
+                        <div className="space-y-2">
+                            <label className="text-xs font-medium text-zinc-300">
+                                Rareté
+                            </label>
+
+                            <select
+                                value={bulkEditValues.rarity}
+                                onChange={(event) =>
+                                    updateBulkEditValue(
+                                        "rarity",
+                                        event.target.value
+                                    )
+                                }
+                                className="h-10 w-full rounded-lg border border-white/10 bg-[#18181b] px-3 text-sm text-white outline-none transition focus:border-violet-400/40"
+                            >
+                                <option value="">
+                                    Ne pas modifier
+                                </option>
+
+                                <option value="Commune">
+                                    Commune
+                                </option>
+
+                                <option value="Peu commune">
+                                    Peu commune
+                                </option>
+
+                                <option value="Rare">
+                                    Rare
+                                </option>
+
+                                <option value="Holo Rare">
+                                    Holo Rare
+                                </option>
+
+                                <option value="Ultra Rare">
+                                    Ultra Rare
+                                </option>
+
+                                <option value="Illustration Rare">
+                                    Illustration Rare
+                                </option>
+
+                                <option value="Special Illustration Rare">
+                                    Special Illustration Rare
+                                </option>
+
+                                <option value="Hyper Rare">
+                                    Hyper Rare
+                                </option>
+                            </select>
+                        </div>
+
+                        {/* Condition */}
+                        <div className="space-y-2">
+                            <label className="text-xs font-medium text-zinc-300">
+                                Condition
+                            </label>
+
+                            <select
+                                value={bulkEditValues.condition}
+                                onChange={(event) =>
+                                    updateBulkEditValue(
+                                        "condition",
+                                        event.target.value
+                                    )
+                                }
+                                className="h-10 w-full rounded-lg border border-white/10 bg-[#18181b] px-3 text-sm text-white outline-none transition focus:border-violet-400/40"
+                            >
+                                <option value="">
+                                    Ne pas modifier
+                                </option>
+
+                                <option value="Mint">
+                                    Mint
+                                </option>
+
+                                <option value="Near Mint">
+                                    Near Mint
+                                </option>
+
+                                <option value="Excellent">
+                                    Excellent
+                                </option>
+
+                                <option value="Good">
+                                    Good
+                                </option>
+
+                                <option value="Played">
+                                    Played
+                                </option>
+
+                                <option value="Poor">
+                                    Poor
+                                </option>
+                            </select>
+                        </div>
+
+                        {/* Localisation */}
+                        <div className="space-y-2">
+                            <label className="text-xs font-medium text-zinc-300">
+                                Localisation
+                            </label>
+
+                            <input
+                                type="text"
+                                value={bulkEditValues.location}
+                                onChange={(event) =>
+                                    updateBulkEditValue(
+                                        "location",
+                                        event.target.value
+                                    )
+                                }
+                                placeholder="Ex. Classeur A"
+                                className="h-10 w-full rounded-lg border border-white/10 bg-[#18181b] px-3 text-sm text-white outline-none placeholder:text-zinc-600 focus:border-violet-400/40"
+                            />
+                        </div>
+                    </div>
+
+                    <DialogFooter>
+                        <button
+                            type="button"
+                            onClick={resetBulkEdit}
+                            className="h-9 rounded-lg border border-white/10 bg-white/5 px-3 text-xs font-medium text-zinc-300 transition hover:bg-white/10 hover:text-white"
+                        >
+                            Annuler
+                        </button>
+
+                        <button
+                            type="button"
+                            disabled={
+                                !Object.values(bulkEditValues).some(
+                                    (value) => value !== ""
+                                )
+                            }
+                            onClick={handleBulkEdit}
+                            className="h-9 rounded-lg bg-violet-500 px-3 text-xs font-medium text-white transition hover:bg-violet-400 disabled:pointer-events-none disabled:opacity-40"
+                        >
+                            Modifier {selectedCardIds.length}{" "}
+                            {selectedCardIds.length > 1
+                                ? "cartes"
+                                : "carte"}
+                        </button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
+            <Dialog
+                open={showBulkDeleteDialog}
+                onOpenChange={(open) => {
+                    setShowBulkDeleteDialog(open);
+
+                    if (!open) {
+                        setActiveBulkAction(null);
+                    }
+                }}
+            >
+                <DialogContent className="border-white/10 bg-[#111114] text-white sm:max-w-md">
+                    <DialogHeader>
+                        <DialogTitle>
+                            Supprimer les cartes sélectionnées ?
+                        </DialogTitle>
+
+                        <DialogDescription className="text-zinc-500">
+                            Cette action va supprimer{" "}
+                            <span className="font-medium text-zinc-300">
+                                {selectedCardIds.length}{" "}
+                                {selectedCardIds.length > 1
+                                    ? "cartes"
+                                    : "carte"}
+                            </span>{" "}
+                            de ta collection.
+                            <br />
+                            <p className="mt-1 text-[11px] leading-relaxed text-zinc-500">
+                                Les cartes sélectionnées seront retirées de ta collection
+                                locale. Cette action ne peut pas être annulée depuis
+                                l'application.
+                            </p>
+                        </DialogDescription>
+                    </DialogHeader>
+
+                    <div className="rounded-xl border border-red-400/15 bg-red-400/[0.04] p-4">
+                        <div className="flex items-start gap-3">
+                            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-red-400/10 text-red-400">
+                                <Trash2 className="h-4 w-4" />
+                            </div>
+
+                            <div>
+                                <p className="text-xs font-medium text-red-300">
+                                    Suppression définitive
+                                </p>
+
+                                <p className="mt-1 text-[11px] leading-relaxed text-zinc-500">
+                                    Les cartes sélectionnées seront retirées
+                                    de ta collection locale.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <DialogFooter>
+                        <button
+                            type="button"
+                            onClick={() => {
+                                setShowBulkDeleteDialog(false);
+                                setActiveBulkAction(null);
+                            }}
+                            className="h-9 rounded-lg border border-white/10 bg-white/5 px-3 text-xs font-medium text-zinc-300 transition hover:bg-white/10 hover:text-white"
+                        >
+                            Annuler
+                        </button>
+
+                        <button
+                            type="button"
+                            onClick={confirmBulkDelete}
+                            className="h-9 rounded-lg bg-red-500/90 px-3 text-xs font-medium text-white transition hover:bg-red-500"
+                        >
+                            Supprimer{" "}
+                            {selectedCardIds.length}{" "}
+                            {selectedCardIds.length > 1
+                                ? "cartes"
+                                : "carte"}
+                        </button>
+                    </DialogFooter>
                 </DialogContent>
             </Dialog>
         </div>
