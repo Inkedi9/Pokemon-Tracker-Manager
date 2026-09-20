@@ -48,10 +48,10 @@
 
 ### M4 — Collection UX & Workflow
 
-- [ ] M4.1 Collection UX
-- [ ] M4.2 Advanced Filters
-- [ ] M4.3 Saved Views
-- [ ] M4.4 Bulk Actions
+- [x] M4.1 Collection UX
+- [x] M4.2 Advanced Filters
+- [x] M4.3 Saved Views
+- [x] M4.4 Bulk Actions
 - [ ] M4.5 Bulk Edit
 - [ ] M4.6 Import / Export
 - [ ] M4.7 Collection Workflow
