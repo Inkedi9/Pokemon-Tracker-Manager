@@ -199,8 +199,8 @@ ROADMAP global - [ROADMAP](./ROADMAP.md)
 
 ## 📌 Current Status
 
-**Version : M1**
+**Version : M4**
 
 Le projet dispose maintenant d'une base fonctionnelle permettant de gérer une collection Pokémon et d'obtenir une première vision financière et statistique de celle-ci.
 
-La prochaine étape est **M2 — Collection Intelligence**, avec davantage d'analyse et de statistiques avancées.
+La prochaine étape est **M5 — Market / Pricing**, avec davantage d'analyse et de statistiques avancées.
