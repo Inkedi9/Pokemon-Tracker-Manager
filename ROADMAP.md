@@ -57,17 +57,17 @@
 
 ### 🔜 M5 Market / Pricing
 
-- [ ] M5.1 Pricing Core
-- [ ] M5.2 Market Value
-- [ ] M5.3 Price History
-- [ ] M5.4 Pricing Intelligence
-- [ ] M5.5 Market Dashboard
-- [ ] M5.6 Pricing UX
+- [x] M5.1 Pricing Core
+- [x] M5.2 Market Value
+- [x] M5.3 Price History
+- [x] M5.4 Pricing Intelligence
+- [x] M5.5 Market Dashboard
+- [x] M5.6 Pricing UX
 
 ### 🔜 Futur
 
-- [ ] M6 Import / Export
+- [ ] M6 Scanner / Card Recognition
 
-- [ ] M7 Scanner / Card Recognition
+- [ ] M7 Import / Export
 
 - [ ] M8 Backend / Sync
