@@ -55,7 +55,7 @@
 - [x] M4.5 Bulk Edit
 - [x] M4.6 Collection Workflow
 
-### 🔜 M5 Market / Pricing
+### ✅ M5 Market / Pricing
 
 - [x] M5.1 Pricing Core
 - [x] M5.2 Market Value
@@ -64,9 +64,18 @@
 - [x] M5.5 Market Dashboard
 - [x] M5.6 Pricing UX
 
-### 🔜 Futur
+### 🔜 M6 Scanner / Card Recognition
 
-- [ ] M6 Scanner / Card Recognition
+- [ ] M6.1 — Scanner UI
+- [ ] M6.2 — Image Capture / Upload
+- [ ] M6.3 — Image Preview & Validation
+- [ ] M6.4 — Recognition Engine
+- [ ] M6.5 — Card Matching
+- [ ] M6.6 — Auto-fill
+- [ ] M6.7 — Scanner → Collection
+- [ ] M6.8 — Polish & Validation
+
+### 🔜 Futur
 
 - [ ] M7 Import / Export
 
