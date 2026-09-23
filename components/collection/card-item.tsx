@@ -16,6 +16,8 @@ import type { PokemonCard } from "@/types/card";
 import { EditCardDialog } from "@/components/collection/edit-card-dialog";
 import { DeleteCardDialog } from "@/components/collection/delete-card-dialog";
 
+import { getMarketPrice } from "@/lib/pricing";
+
 type CardItemProps = {
     card: PokemonCard;
     isSelected: boolean;
@@ -23,6 +25,14 @@ type CardItemProps = {
 };
 
 export function CardItem({ card, isSelected, onSelect, }: CardItemProps) {
+
+    const marketPrice = getMarketPrice(card);
+
+    const marketDifference =
+        marketPrice === null
+            ? null
+            : marketPrice - card.purchasePrice;
+
     return (
         <Card
             className={`
@@ -139,6 +149,48 @@ export function CardItem({ card, isSelected, onSelect, }: CardItemProps) {
                         </p>
                     </div>
                 </div>
+
+                {/* Market */}
+                <div className="grid grid-cols-2 gap-3">
+                    <div>
+                        <p className="text-[10px] uppercase tracking-[0.16em] text-zinc-600">
+                            Achat
+                        </p>
+
+                        <p className="mt-1 font-mono text-sm font-medium text-zinc-300">
+                            {card.purchasePrice.toFixed(2)} €
+                        </p>
+                    </div>
+
+                    <div>
+                        <p className="text-[10px] uppercase tracking-[0.16em] text-zinc-600">
+                            Marché
+                        </p>
+
+                        <p className="mt-1 font-mono text-sm font-semibold text-white">
+                            {marketPrice !== null
+                                ? `${marketPrice.toFixed(2)} €`
+                                : "—"}
+                        </p>
+                    </div>
+                </div>
+                {marketDifference !== null && (
+                    <div className="flex items-center justify-between gap-2">
+                        <span className="text-[10px] uppercase tracking-[0.12em] text-zinc-600">
+                            P/L
+                        </span>
+
+                        <span
+                            className={`text-[10px] font-medium ${marketDifference >= 0
+                                ? "text-emerald-400"
+                                : "text-red-400"
+                                }`}
+                        >
+                            {marketDifference >= 0 ? "+" : ""}
+                            {marketDifference.toFixed(2)} €
+                        </span>
+                    </div>
+                )}
 
                 {/* Location */}
                 {card.location && (

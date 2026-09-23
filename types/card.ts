@@ -14,6 +14,13 @@ export type CardCondition =
     | "HP"
     | "DMG";
 
+export type PriceSource =
+    | "manual"
+    | "cardmarket"
+    | "tcgplayer"
+    | "ebay"
+    | "other";
+
 export type PokemonCard = {
     id: string;
 
@@ -23,14 +30,24 @@ export type PokemonCard = {
 
     language: CardLanguage;
     rarity: string;
-
     quantity: number;
     condition: CardCondition;
 
     purchasePrice: number;
     estimatedValue: number;
 
+    marketPrice?: number;
+    priceSource?: PriceSource;
+    priceUpdatedAt?: string;
+    priceHistory?: PriceSnapshot[];
+
     image?: string;
     location?: string;
     notes?: string;
+};
+
+export type PriceSnapshot = {
+    price: number;
+    source?: PriceSource;
+    recordedAt: string;
 };

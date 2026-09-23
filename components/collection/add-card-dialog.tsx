@@ -33,6 +33,16 @@ import type {
     PokemonCard,
 } from "@/types/card";
 
+import {
+    normalizeMarketPrice,
+    normalizePriceSource,
+} from "@/lib/pricing-validation";
+
+import {
+    addPriceSnapshot,
+    createPriceSnapshot,
+} from "@/lib/price-history";
+
 const initialForm = {
     name: "",
     set: "",
@@ -43,6 +53,8 @@ const initialForm = {
     quantity: "1",
     purchasePrice: "",
     estimatedValue: "",
+    marketPrice: "",
+    priceSource: "none",
     location: "",
     notes: "",
 };
@@ -108,6 +120,16 @@ export function AddCardDialog() {
         const purchasePrice = Number(form.purchasePrice);
         const estimatedValue = Number(form.estimatedValue);
 
+        const marketPrice =
+            form.marketPrice.trim() === ""
+                ? undefined
+                : normalizeMarketPrice(form.marketPrice);
+
+        const priceSource =
+            form.priceSource === "none"
+                ? undefined
+                : normalizePriceSource(form.priceSource);
+
         if (!Number.isInteger(quantity) || quantity < 1) {
             setError("La quantité doit être un nombre entier supérieur à 0.");
             return;
@@ -120,6 +142,16 @@ export function AddCardDialog() {
 
         if (Number.isNaN(estimatedValue) || estimatedValue < 0) {
             setError("La valeur estimée doit être supérieure ou égale à 0.");
+            return;
+        }
+
+        if (
+            form.marketPrice.trim() !== "" &&
+            marketPrice === undefined
+        ) {
+            setError(
+                "Le prix marché doit être un nombre supérieur ou égal à 0."
+            );
             return;
         }
 
@@ -139,11 +171,30 @@ export function AddCardDialog() {
             purchasePrice,
             estimatedValue,
 
+            ...(marketPrice !== undefined
+                ? {
+                    marketPrice,
+                    priceSource,
+                    priceUpdatedAt: new Date().toISOString(),
+                }
+                : {}),
+
             location: form.location.trim(),
             notes: form.notes.trim(),
         };
 
-        addCard(newCard);
+        const cardWithHistory =
+            createPriceSnapshot(newCard);
+
+        const finalCard =
+            cardWithHistory
+                ? addPriceSnapshot(
+                    newCard,
+                    cardWithHistory
+                )
+                : newCard;
+
+        addCard(finalCard);
 
         toast.success("Carte ajoutée", {
             description: `${newCard.name} a été ajoutée à ta collection.`,
@@ -340,7 +391,7 @@ export function AddCardDialog() {
                                 Valeur & quantité
                             </p>
 
-                            <div className="grid gap-4 sm:grid-cols-3">
+                            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                                 <div className="space-y-2">
                                     <Label htmlFor="quantity">Quantité</Label>
 
@@ -399,6 +450,69 @@ export function AddCardDialog() {
                                         placeholder="0.00"
                                         className="border-white/10 bg-white/5 text-white placeholder:text-zinc-600"
                                     />
+                                </div>
+
+                                <div className="space-y-2">
+                                    <Label htmlFor="marketPrice">
+                                        Prix marché (€)
+                                    </Label>
+
+                                    <Input
+                                        id="marketPrice"
+                                        type="number"
+                                        min="0"
+                                        step="0.01"
+                                        value={form.marketPrice}
+                                        onChange={(event) =>
+                                            updateField(
+                                                "marketPrice",
+                                                event.target.value
+                                            )
+                                        }
+                                        placeholder="Optionnel"
+                                        className="border-white/10 bg-white/5 text-white placeholder:text-zinc-600"
+                                    />
+                                </div>
+
+                                <div className="mt-4 space-y-2">
+                                    <Label>Source du prix marché</Label>
+
+                                    <Select
+                                        value={form.priceSource}
+                                        onValueChange={(value) =>
+                                            updateField("priceSource", value)
+                                        }
+                                    >
+                                        <SelectTrigger className="border-white/10 bg-white/5 text-white">
+                                            <SelectValue placeholder="Sélectionner une source" />
+                                        </SelectTrigger>
+
+                                        <SelectContent>
+                                            <SelectItem value="none">
+                                                Aucune source
+                                            </SelectItem>
+
+                                            <SelectItem value="manual">
+                                                Saisie manuelle
+                                            </SelectItem>
+
+                                            <SelectItem value="cardmarket">
+                                                Cardmarket
+                                            </SelectItem>
+
+                                            <SelectItem value="tcgplayer">
+                                                TCGplayer
+                                            </SelectItem>
+
+                                            <SelectItem value="ebay">
+                                                eBay
+                                            </SelectItem>
+
+                                            <SelectItem value="other">
+                                                Autre
+                                            </SelectItem>
+                                        </SelectContent>
+                                    </Select>
                                 </div>
                             </div>
                         </div>

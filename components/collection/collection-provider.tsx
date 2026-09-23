@@ -10,6 +10,12 @@ import {
 import type { PokemonCard } from "@/types/card";
 import initialCards from "@/data/cards.json";
 
+import {
+  addPriceSnapshot,
+  createPriceSnapshot,
+  shouldRecordPriceSnapshot,
+} from "@/lib/price-history";
+
 type CollectionContextType = {
   cards: PokemonCard[];
   addCard: (card: PokemonCard) => void;
@@ -77,9 +83,30 @@ export function CollectionProvider({
 
   function updateCard(updatedCard: PokemonCard) {
     setCards((current) =>
-      current.map((card) =>
-        card.id === updatedCard.id ? updatedCard : card
-      )
+      current.map((card) => {
+        if (card.id !== updatedCard.id) {
+          return card;
+        }
+
+        const shouldAddSnapshot =
+          shouldRecordPriceSnapshot(updatedCard);
+
+        if (!shouldAddSnapshot) {
+          return updatedCard;
+        }
+
+        const snapshot =
+          createPriceSnapshot(updatedCard);
+
+        if (!snapshot) {
+          return updatedCard;
+        }
+
+        return addPriceSnapshot(
+          updatedCard,
+          snapshot
+        );
+      })
     );
   }
 
