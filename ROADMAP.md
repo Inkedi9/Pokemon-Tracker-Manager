@@ -66,17 +66,34 @@
 
 ### 🔜 M6 Scanner / Card Recognition
 
-- [ ] M6.1 — Scanner UI
-- [ ] M6.2 — Image Capture / Upload
-- [ ] M6.3 — Image Preview & Validation
-- [ ] M6.4 — Recognition Engine
-- [ ] M6.5 — Card Matching
-- [ ] M6.6 — Auto-fill
-- [ ] M6.7 — Scanner → Collection
-- [ ] M6.8 — Polish & Validation
+- [x] M6.1 — Scanner UI
+- [x] M6.2 — Image Capture / Upload
+- [x] M6.3 — Image Preview & Validation
+- [x] M6.4 — Recognition Engine
+- [x] M6.5 — Card Matching
+- [x] M6.6 — Auto-fill
+- [x] M6.7 — Scanner → Collection
+- [x] M6.8 — Polish & Validation
 
-### 🔜 Futur
+### 🔜 M7 — Import / Export
 
-- [ ] M7 Import / Export
+- [ ] Collection import
+- [ ] Collection export
+- [ ] Backup / restore
+- [ ] Structured data formats
+- [ ] Validation des données importées
+- [ ] Gestion des conflits
+- [ ] Import preview
 
-- [ ] M8 Backend / Sync
+### 🔮 M8 — Backend / Sync
+
+- [ ] Base de données
+- [ ] Backend
+- [ ] Authentification
+- [ ] Synchronisation cloud
+- [ ] Multi-device
+- [ ] API Pokémon
+- [ ] Prix de marché automatisés
+- [ ] Historique de prix externe
+- [ ] Gestion des classeurs
+- [ ] Gestion des emplacements
