@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { BarChart3, TrendingUp, Library, Package, BrainCircuit } from "lucide-react";
+import { BarChart3, TrendingUp, Library, Package, BrainCircuit, ScanSearch } from "lucide-react";
 
 const navigation = [
   {
@@ -23,6 +23,11 @@ const navigation = [
     label: "Analytics",
     href: "/analytics",
     icon: TrendingUp,
+  },
+  {
+    label: "Scanner",
+    href: "/scanner",
+    icon: ScanSearch,
   },
 ];
 

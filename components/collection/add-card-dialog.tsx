@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Plus } from "lucide-react";
 
 import {
@@ -26,6 +26,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 
 import { useCollection } from "@/components/collection/collection-provider";
+
+import type {
+    CardAutoFillData,
+} from "@/lib/recognition/card-autofill";
 
 import type {
     CardCondition,
@@ -59,13 +63,33 @@ const initialForm = {
     notes: "",
 };
 
-export function AddCardDialog() {
+type AddCardDialogProps = {
+    initialData?: CardAutoFillData | null;
+    open?: boolean;
+    onOpenChange?: (open: boolean) => void;
+    onSuccess?: (card: PokemonCard) => void;
+};
+
+export function AddCardDialog({
+    initialData,
+    open: controlledOpen,
+    onOpenChange,
+    onSuccess,
+}: AddCardDialogProps = {}) {
     const { addCard } = useCollection();
 
     const [form, setForm] = useState(initialForm);
     const [error, setError] = useState("");
 
-    const [open, setOpen] = useState(false);
+    const [internalOpen, setInternalOpen] =
+        useState(false);
+
+    const isControlled =
+        controlledOpen !== undefined;
+
+    const open = isControlled
+        ? controlledOpen
+        : internalOpen;
 
     function updateField(
         field: keyof typeof form,
@@ -78,10 +102,28 @@ export function AddCardDialog() {
 
         setError("");
     }
+
     function resetForm() {
         setForm(initialForm);
         setError("");
     }
+
+    useEffect(() => {
+        if (!open || !initialData) {
+            return;
+        }
+
+        setForm({
+            ...initialForm,
+            name: initialData.name,
+            set: initialData.set,
+            number: initialData.number,
+            language: initialData.language,
+            rarity: initialData.rarity,
+        });
+
+        setError("");
+    }, [open, initialData]);
 
     function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -200,24 +242,43 @@ export function AddCardDialog() {
             description: `${newCard.name} a été ajoutée à ta collection.`,
         });
 
-        resetForm();
-        setOpen(false);
+        onSuccess?.(newCard);
+        handleDialogOpenChange(false);
     }
 
-    function handleOpenChange(value: boolean) {
-        setOpen(value);
+    function handleDialogOpenChange(
+        value: boolean
+    ) {
+        if (!isControlled) {
+            setInternalOpen(value);
+        }
+
+        onOpenChange?.(value);
 
         if (!value) {
             resetForm();
         }
     }
 
+    function handleOpenChange(value: boolean) {
+        handleDialogOpenChange(value);
+    }
+
     return (
-        <Dialog open={open} onOpenChange={handleOpenChange}>
-            <DialogTrigger className="inline-flex h-9 items-center justify-center gap-2 rounded-md bg-yellow-400 px-4 py-2 text-sm font-medium text-black transition-colors hover:bg-yellow-300">
-                <Plus className="h-4 w-4" />
-                Ajouter une carte
-            </DialogTrigger>
+        <Dialog
+            open={open}
+            onOpenChange={handleDialogOpenChange}
+        >
+            {!isControlled && (
+                <DialogTrigger>
+                    <Button
+                        type="button"
+                        className="inline-flex h-9 items-center justify-center gap-2 rounded-md bg-yellow-400 px-4 py-2 text-sm font-medium text-black transition-colors hover:bg-yellow-300"
+                    >
+                        Ajouter une carte
+                    </Button>
+                </DialogTrigger>
+            )}
 
             <DialogContent className="max-h-[90vh] overflow-y-auto border-white/10 bg-[#111114] text-white sm:max-w-[700px]">
                 <DialogHeader>
