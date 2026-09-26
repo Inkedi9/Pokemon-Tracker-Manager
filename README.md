@@ -543,8 +543,25 @@ ROADMAP global - [ROADMAP](./ROADMAP.md)
 
 ## 📌 Current Status
 
-**Version : M4**
+**Version : M6 — Scanner / Card Recognition**
 
-Le projet dispose maintenant d'une base fonctionnelle permettant de gérer une collection Pokémon et d'obtenir une première vision financière et statistique de celle-ci.
+Le projet dispose maintenant d'une base complète permettant de :
 
-La prochaine étape est **M5 — Market / Pricing**, avec davantage d'analyse et de statistiques avancées.
+- gérer une collection Pokémon ;
+- analyser sa composition ;
+- suivre sa valeur ;
+- suivre l'évolution des prix ;
+- analyser sa rentabilité ;
+- détecter les doublons ;
+- suivre des objectifs ;
+- générer des recommandations ;
+- filtrer et organiser la collection ;
+- ajouter plusieurs cartes via des actions bulk ;
+- scanner une carte ;
+- extraire son texte avec OCR ;
+- rechercher des correspondances ;
+- classer les candidats par confiance ;
+- préremplir automatiquement le formulaire d'ajout ;
+- ajouter directement la carte dans la collection.
+
+La prochaine étape est **M7 — Import / Export**, avant l'évolution vers une architecture backend et la synchronisation cloud avec **M8**.
