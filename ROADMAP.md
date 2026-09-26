@@ -64,7 +64,7 @@
 - [x] M5.5 Market Dashboard
 - [x] M5.6 Pricing UX
 
-### 🔜 M6 Scanner / Card Recognition
+### ✅ M6 Scanner / Card Recognition
 
 - [x] M6.1 — Scanner UI
 - [x] M6.2 — Image Capture / Upload
