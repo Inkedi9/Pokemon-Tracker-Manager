@@ -48,21 +48,21 @@
 
 ### ✅ M4 — Collection UX & Workflow
 
-- [x] M4.1 Collection UX
-- [x] M4.2 Advanced Filters
-- [x] M4.3 Saved Views
-- [x] M4.4 Bulk Actions
-- [x] M4.5 Bulk Edit
-- [x] M4.6 Collection Workflow
+- [x] M4.1 — Collection UX
+- [x] M4.2 — Advanced Filters
+- [x] M4.3 — Saved Views
+- [x] M4.4 — Bulk Actions
+- [x] M4.5 — Bulk Edit
+- [x] M4.6 — Collection Workflow
 
 ### ✅ M5 — Market / Pricing
 
-- [x] M5.1 Pricing Core
-- [x] M5.2 Market Value
-- [x] M5.3 Price History
-- [x] M5.4 Pricing Intelligence
-- [x] M5.5 Market Dashboard
-- [x] M5.6 Pricing UX
+- [x] M5.1 — Pricing Core
+- [x] M5.2 — Market Value
+- [x] M5.3 — Price History
+- [x] M5.4 — Pricing Intelligence
+- [x] M5.5 — Market Dashboard
+- [x] M5.6 — Pricing UX
 
 ### ✅ M6 — Scanner / Card Recognition
 
