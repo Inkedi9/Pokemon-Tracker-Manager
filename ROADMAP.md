@@ -2,38 +2,38 @@
 
 ### ✅ M0 — Foundation
 
-- [x] Initial project
-- [x] Layout
-- [x] Navigation
-- [x] Data model
-- [x] Local storage
-- [x] Collection provider
+- [x] M0.1 — Initial project
+- [x] M0.2 — Layout
+- [x] M0.3 — Navigation
+- [x] M0.4 — Data model
+- [x] M0.5 — Local storage
+- [x] M0.6 — Collection provider
 
 ### ✅ M1 — Collection & Dashboard
 
-- [x] Dashboard
-- [x] Collection management
-- [x] Add / Edit / Delete
-- [x] Search
-- [x] Filters
-- [x] Sorting
-- [x] Financial overview
-- [x] Language statistics
-- [x] Rarity statistics
-- [x] Collection insights
-- [x] Responsive UI
-- [x] Footer
-- [x] Dashboard avancé
+- [x] M1.1 — Dashboard
+- [x] M1.2 — Collection management
+- [x] M1.3 — Add / Edit / Delete
+- [x] M1.4 — Search
+- [x] M1.5 — Filters
+- [x] M1.6 — Sorting
+- [x] M1.7 — Financial overview
+- [x] M1.8 — Language statistics
+- [x] M1.9 — Rarity statistics
+- [x] M1.10 — Collection insights
+- [x] M1.11 — Responsive UI
+- [x] M1.12 — Footer
+- [x] M1.13 — Dashboard avancé
 
 ### ✅ M2 — Collection Intelligence
 
-- [x] Analyse avancée de la collection
-- [x] Détection des doublons
-- [x] Statistiques par extension
-- [x] Analyse de valeur par extension
-- [x] Cartes les plus rentables
-- [x] Concentration de la valeur
-- [x] Statistiques avancées
+- [x] M2.1 — Analyse avancée de la collection
+- [x] M2.2 — Détection des doublons
+- [x] M2.3 — Statistiques par extension
+- [x] M2.4 — Analyse de valeur par extension
+- [x] M2.5 — Cartes les plus rentables
+- [x] M2.6 — Concentration de la valeur
+- [x] M2.7 — Statistiques avancées
 
 ### ✅ M3 — Collection Intelligence Core
 
